@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.coc.entity.CiLabelRuleMapper">
+  <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.entity.CiLabelRule">
+    <id column="RULE_ID" jdbcType="VARCHAR" property="ruleId" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="CUSTOM_ID" jdbcType="VARCHAR" property="customId" />
+    <result column="CALCU_ELEMENT" jdbcType="VARCHAR" property="calcuElement" />
+    <result column="MIN_VAL" jdbcType="DECIMAL" property="minVal" />
+    <result column="MAX_VAL" jdbcType="DECIMAL" property="maxVal" />
+    <result column="SORT_NUM" jdbcType="INTEGER" property="sortNum" />
+    <result column="CUSTOM_TYPE" jdbcType="SMALLINT" property="customType" />
+    <result column="ELEMENT_TYPE" jdbcType="SMALLINT" property="elementType" />
+    <result column="LABEL_FLAG" jdbcType="SMALLINT" property="labelFlag" />
+    <result column="ATTR_VAL" jdbcType="VARCHAR" property="attrVal" />
+    <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
+    <result column="END_TIME" jdbcType="VARCHAR" property="endTime" />
+    <result column="CONTIUE_MIN_VAL" jdbcType="VARCHAR" property="contiueMinVal" />
+    <result column="CONTIUE_MAX_VAL" jdbcType="VARCHAR" property="contiueMaxVal" />
+    <result column="LEFT_ZONE_SIGN" jdbcType="VARCHAR" property="leftZoneSign" />
+    <result column="RIGHT_ZONE_SIGN" jdbcType="VARCHAR" property="rightZoneSign" />
+    <result column="EXACT_VALUE" jdbcType="VARCHAR" property="exactValue" />
+    <result column="DARK_VALUE" jdbcType="VARCHAR" property="darkValue" />
+    <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+    <result column="IS_NEED_OFFSET" jdbcType="SMALLINT" property="isNeedOffset" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    RULE_ID, PARENT_ID, CUSTOM_ID, CALCU_ELEMENT, MIN_VAL, MAX_VAL, SORT_NUM, CUSTOM_TYPE, 
+    ELEMENT_TYPE, LABEL_FLAG, ATTR_VAL, START_TIME, END_TIME, CONTIUE_MIN_VAL, CONTIUE_MAX_VAL, 
+    LEFT_ZONE_SIGN, RIGHT_ZONE_SIGN, EXACT_VALUE, DARK_VALUE, TABLE_NAME, IS_NEED_OFFSET
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ci_label_rule
+    where RULE_ID = #{ruleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ci_label_rule
+    where RULE_ID = #{ruleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ai.rti.ic.grp.entity.CiLabelRule">
+    insert into ci_label_rule (RULE_ID, PARENT_ID, CUSTOM_ID, 
+      CALCU_ELEMENT, MIN_VAL, MAX_VAL, 
+      SORT_NUM, CUSTOM_TYPE, ELEMENT_TYPE, 
+      LABEL_FLAG, ATTR_VAL, START_TIME, 
+      END_TIME, CONTIUE_MIN_VAL, CONTIUE_MAX_VAL, 
+      LEFT_ZONE_SIGN, RIGHT_ZONE_SIGN, EXACT_VALUE, 
+      DARK_VALUE, TABLE_NAME, IS_NEED_OFFSET
+      )
+    values (#{ruleId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{customId,jdbcType=VARCHAR}, 
+      #{calcuElement,jdbcType=VARCHAR}, #{minVal,jdbcType=DECIMAL}, #{maxVal,jdbcType=DECIMAL}, 
+      #{sortNum,jdbcType=INTEGER}, #{customType,jdbcType=SMALLINT}, #{elementType,jdbcType=SMALLINT}, 
+      #{labelFlag,jdbcType=SMALLINT}, #{attrVal,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{contiueMinVal,jdbcType=VARCHAR}, #{contiueMaxVal,jdbcType=VARCHAR}, 
+      #{leftZoneSign,jdbcType=VARCHAR}, #{rightZoneSign,jdbcType=VARCHAR}, #{exactValue,jdbcType=VARCHAR}, 
+      #{darkValue,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, #{isNeedOffset,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.rti.ic.grp.entity.CiLabelRule">
+    insert into ci_label_rule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ruleId != null">
+        RULE_ID,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="customId != null">
+        CUSTOM_ID,
+      </if>
+      <if test="calcuElement != null">
+        CALCU_ELEMENT,
+      </if>
+      <if test="minVal != null">
+        MIN_VAL,
+      </if>
+      <if test="maxVal != null">
+        MAX_VAL,
+      </if>
+      <if test="sortNum != null">
+        SORT_NUM,
+      </if>
+      <if test="customType != null">
+        CUSTOM_TYPE,
+      </if>
+      <if test="elementType != null">
+        ELEMENT_TYPE,
+      </if>
+      <if test="labelFlag != null">
+        LABEL_FLAG,
+      </if>
+      <if test="attrVal != null">
+        ATTR_VAL,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="contiueMinVal != null">
+        CONTIUE_MIN_VAL,
+      </if>
+      <if test="contiueMaxVal != null">
+        CONTIUE_MAX_VAL,
+      </if>
+      <if test="leftZoneSign != null">
+        LEFT_ZONE_SIGN,
+      </if>
+      <if test="rightZoneSign != null">
+        RIGHT_ZONE_SIGN,
+      </if>
+      <if test="exactValue != null">
+        EXACT_VALUE,
+      </if>
+      <if test="darkValue != null">
+        DARK_VALUE,
+      </if>
+      <if test="tableName != null">
+        TABLE_NAME,
+      </if>
+      <if test="isNeedOffset != null">
+        IS_NEED_OFFSET,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ruleId != null">
+        #{ruleId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        #{customId,jdbcType=VARCHAR},
+      </if>
+      <if test="calcuElement != null">
+        #{calcuElement,jdbcType=VARCHAR},
+      </if>
+      <if test="minVal != null">
+        #{minVal,jdbcType=DECIMAL},
+      </if>
+      <if test="maxVal != null">
+        #{maxVal,jdbcType=DECIMAL},
+      </if>
+      <if test="sortNum != null">
+        #{sortNum,jdbcType=INTEGER},
+      </if>
+      <if test="customType != null">
+        #{customType,jdbcType=SMALLINT},
+      </if>
+      <if test="elementType != null">
+        #{elementType,jdbcType=SMALLINT},
+      </if>
+      <if test="labelFlag != null">
+        #{labelFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="attrVal != null">
+        #{attrVal,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="contiueMinVal != null">
+        #{contiueMinVal,jdbcType=VARCHAR},
+      </if>
+      <if test="contiueMaxVal != null">
+        #{contiueMaxVal,jdbcType=VARCHAR},
+      </if>
+      <if test="leftZoneSign != null">
+        #{leftZoneSign,jdbcType=VARCHAR},
+      </if>
+      <if test="rightZoneSign != null">
+        #{rightZoneSign,jdbcType=VARCHAR},
+      </if>
+      <if test="exactValue != null">
+        #{exactValue,jdbcType=VARCHAR},
+      </if>
+      <if test="darkValue != null">
+        #{darkValue,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="isNeedOffset != null">
+        #{isNeedOffset,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.rti.ic.grp.entity.CiLabelRule">
+    update ci_label_rule
+    <set>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        CUSTOM_ID = #{customId,jdbcType=VARCHAR},
+      </if>
+      <if test="calcuElement != null">
+        CALCU_ELEMENT = #{calcuElement,jdbcType=VARCHAR},
+      </if>
+      <if test="minVal != null">
+        MIN_VAL = #{minVal,jdbcType=DECIMAL},
+      </if>
+      <if test="maxVal != null">
+        MAX_VAL = #{maxVal,jdbcType=DECIMAL},
+      </if>
+      <if test="sortNum != null">
+        SORT_NUM = #{sortNum,jdbcType=INTEGER},
+      </if>
+      <if test="customType != null">
+        CUSTOM_TYPE = #{customType,jdbcType=SMALLINT},
+      </if>
+      <if test="elementType != null">
+        ELEMENT_TYPE = #{elementType,jdbcType=SMALLINT},
+      </if>
+      <if test="labelFlag != null">
+        LABEL_FLAG = #{labelFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="attrVal != null">
+        ATTR_VAL = #{attrVal,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="contiueMinVal != null">
+        CONTIUE_MIN_VAL = #{contiueMinVal,jdbcType=VARCHAR},
+      </if>
+      <if test="contiueMaxVal != null">
+        CONTIUE_MAX_VAL = #{contiueMaxVal,jdbcType=VARCHAR},
+      </if>
+      <if test="leftZoneSign != null">
+        LEFT_ZONE_SIGN = #{leftZoneSign,jdbcType=VARCHAR},
+      </if>
+      <if test="rightZoneSign != null">
+        RIGHT_ZONE_SIGN = #{rightZoneSign,jdbcType=VARCHAR},
+      </if>
+      <if test="exactValue != null">
+        EXACT_VALUE = #{exactValue,jdbcType=VARCHAR},
+      </if>
+      <if test="darkValue != null">
+        DARK_VALUE = #{darkValue,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="isNeedOffset != null">
+        IS_NEED_OFFSET = #{isNeedOffset,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where RULE_ID = #{ruleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.rti.ic.grp.entity.CiLabelRule">
+    update ci_label_rule
+    set PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      CUSTOM_ID = #{customId,jdbcType=VARCHAR},
+      CALCU_ELEMENT = #{calcuElement,jdbcType=VARCHAR},
+      MIN_VAL = #{minVal,jdbcType=DECIMAL},
+      MAX_VAL = #{maxVal,jdbcType=DECIMAL},
+      SORT_NUM = #{sortNum,jdbcType=INTEGER},
+      CUSTOM_TYPE = #{customType,jdbcType=SMALLINT},
+      ELEMENT_TYPE = #{elementType,jdbcType=SMALLINT},
+      LABEL_FLAG = #{labelFlag,jdbcType=SMALLINT},
+      ATTR_VAL = #{attrVal,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=VARCHAR},
+      END_TIME = #{endTime,jdbcType=VARCHAR},
+      CONTIUE_MIN_VAL = #{contiueMinVal,jdbcType=VARCHAR},
+      CONTIUE_MAX_VAL = #{contiueMaxVal,jdbcType=VARCHAR},
+      LEFT_ZONE_SIGN = #{leftZoneSign,jdbcType=VARCHAR},
+      RIGHT_ZONE_SIGN = #{rightZoneSign,jdbcType=VARCHAR},
+      EXACT_VALUE = #{exactValue,jdbcType=VARCHAR},
+      DARK_VALUE = #{darkValue,jdbcType=VARCHAR},
+      TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      IS_NEED_OFFSET = #{isNeedOffset,jdbcType=SMALLINT}
+    where RULE_ID = #{ruleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

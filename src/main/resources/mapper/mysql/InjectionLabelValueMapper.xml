@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.dao.IInjectionLabelValueDao">
+
+    <delete id="updateDataSource" parameterType="java.util.Map">
+
+        DELETE from injection_label_value
+
+        WHERE tar_grp_code=#{customGroupId} and attr_name = #{col}
+        
+    </delete>
+    
+    
+    <insert id="" parameterType="java.util.Map">
+
+      INSERT INTO INJECTION_LABEL_VALUE
+
+      (tar_grp_code,attr_name,LABEL_VALUE,STATUS_CD,CREATE_STAFF,CREATE_DATE,LABEL_VALUE_ID,INJECTION_LABEL_ID)
+
+      (select #{customGroupId},#{col},#{val},1000,#{userId},sysdate(),nextval('SEQ_LABEL_VALUE'),0)
+
+
+    </insert>
+
+</mapper>

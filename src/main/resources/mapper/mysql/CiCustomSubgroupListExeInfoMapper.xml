@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.dao.ICiCustomSubgroupListExeInfoDao">
+  <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.entity.CiCustomSubgroupListExeInfo">
+    <id column="EXE_INFO_ID" jdbcType="VARCHAR" property="exeInfoId" />
+    <result column="SUBGROUP_ID" jdbcType="VARCHAR" property="subgroupId" />
+    <result column="EXPRESSION" jdbcType="VARCHAR" property="expression" />
+    <result column="EXCP_INFO" jdbcType="VARCHAR" property="excpInfo" />
+    <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EXE_INFO_ID, SUBGROUP_ID, EXPRESSION, EXCP_INFO, START_TIME, END_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ci_custom_subgroup_list_exe_info
+    where EXE_INFO_ID = #{exeInfoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ci_custom_subgroup_list_exe_info
+    where EXE_INFO_ID = #{exeInfoId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ai.rti.ic.grp.entity.CiCustomSubgroupListExeInfo">
+    insert into ci_custom_subgroup_list_exe_info (EXE_INFO_ID, SUBGROUP_ID, EXPRESSION, 
+      EXCP_INFO, START_TIME, END_TIME
+      )
+    values (#{exeInfoId,jdbcType=VARCHAR}, #{subgroupId,jdbcType=VARCHAR}, #{expression,jdbcType=VARCHAR}, 
+      #{excpInfo,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.rti.ic.grp.entity.CiCustomSubgroupListExeInfo">
+    insert into ci_custom_subgroup_list_exe_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="exeInfoId != null">
+        EXE_INFO_ID,
+      </if>
+      <if test="subgroupId != null">
+        SUBGROUP_ID,
+      </if>
+      <if test="expression != null">
+        EXPRESSION,
+      </if>
+      <if test="excpInfo != null">
+        EXCP_INFO,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="exeInfoId != null">
+        #{exeInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="subgroupId != null">
+        #{subgroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="expression != null">
+        #{expression,jdbcType=VARCHAR},
+      </if>
+      <if test="excpInfo != null">
+        #{excpInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.rti.ic.grp.entity.CiCustomSubgroupListExeInfo">
+    update ci_custom_subgroup_list_exe_info
+    <set>
+      <if test="subgroupId != null">
+        SUBGROUP_ID = #{subgroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="expression != null">
+        EXPRESSION = #{expression,jdbcType=VARCHAR},
+      </if>
+      <if test="excpInfo != null">
+        EXCP_INFO = #{excpInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where EXE_INFO_ID = #{exeInfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.rti.ic.grp.entity.CiCustomSubgroupListExeInfo">
+    update ci_custom_subgroup_list_exe_info
+    set SUBGROUP_ID = #{subgroupId,jdbcType=VARCHAR},
+      EXPRESSION = #{expression,jdbcType=VARCHAR},
+      EXCP_INFO = #{excpInfo,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP}
+    where EXE_INFO_ID = #{exeInfoId,jdbcType=VARCHAR}
+  </update>
+</mapper>

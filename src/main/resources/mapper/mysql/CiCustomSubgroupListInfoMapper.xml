@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.dao.ICiCustomSubgroupListInfoDao">
+  <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.entity.CiCustomSubgroupInfo">
+    <result column="subgroup_list_id" jdbcType="VARCHAR" property="subgroupListId" />
+    <result column="DATA_DATE" jdbcType="VARCHAR" property="dataDate" />
+    <result column="SUBGROUP_ID" jdbcType="VARCHAR" property="subgroupId" />
+    <result column="custom_num" jdbcType="INTEGER" property="customNum" />
+    <result column="increment_num" jdbcType="INTEGER" property="incrementNum" />
+    <result column="decrement_num" jdbcType="INTEGER" property="decrementNum" />
+    <result column="DATA_STATUS" jdbcType="INTEGER" property="dataStatus" />
+    <result column="DATA_TIME" jdbcType="TIMESTAMP" property="dataTime" />
+    <result column="EXCP_INFO" jdbcType="VARCHAR" property="excpInfo" />
+    <result column="FILE_CREATE_STATUS" jdbcType="INTEGER" property="fileCreateStatus" />
+    <result column="FILE_APPROVE_STATUS" jdbcType="INTEGER" property="fileApproveStatus" />
+    <result column="MONTH_LABEL_DATE" jdbcType="VARCHAR" property="monthLabelDate" />
+    <result column="DAY_LABEL_DATE" jdbcType="VARCHAR" property="dayLabelDate" />
+    <result column="LIST_MAX_NUM" jdbcType="INTEGER" property="listMaxNum" />
+  </resultMap>
+
+
+  <insert id="insert" parameterType="com.ai.rti.ic.grp.entity.CiCustomSubgroupInfo">
+    insert into ci_custom_subgroup_list_info (subgroup_list_id, DATA_DATE, SUBGROUP_ID, 
+      custom_num, increment_num, decrement_num, 
+      DATA_STATUS, DATA_TIME, EXCP_INFO, 
+      FILE_CREATE_STATUS, FILE_APPROVE_STATUS, MONTH_LABEL_DATE, 
+      DAY_LABEL_DATE, LIST_MAX_NUM, DUPLICATE_NUM
+      )
+    values (#{subgroupListId,jdbcType=VARCHAR}, #{dataDate,jdbcType=VARCHAR}, #{subgroupId,jdbcType=VARCHAR}, 
+      #{customNum,jdbcType=INTEGER}, #{incrementNum,jdbcType=INTEGER}, #{decrementNum,jdbcType=INTEGER}, 
+      #{dataStatus,jdbcType=INTEGER}, #{dataTime,jdbcType=TIMESTAMP}, #{excpInfo,jdbcType=VARCHAR}, 
+      #{fileCreateStatus,jdbcType=INTEGER}, #{fileApproveStatus,jdbcType=INTEGER}, #{monthLabelDate,jdbcType=VARCHAR}, 
+      #{dayLabelDate,jdbcType=VARCHAR}, #{listMaxNum,jdbcType=INTEGER}, #{duplicateNum,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.rti.ic.grp.entity.CiCustomSubgroupInfo">
+    insert into ci_custom_subgroup_list_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subgroupListId != null">
+        subgroup_list_id,
+      </if>
+      <if test="dataDate != null">
+        DATA_DATE,
+      </if>
+      <if test="subgroupId != null">
+        SUBGROUP_ID,
+      </if>
+      <if test="customNum != null">
+        custom_num,
+      </if>
+      <if test="incrementNum != null">
+        increment_num,
+      </if>
+      <if test="decrementNum != null">
+        decrement_num,
+      </if>
+      <if test="dataStatus != null">
+        DATA_STATUS,
+      </if>
+      <if test="dataTime != null">
+        DATA_TIME,
+      </if>
+      <if test="excpInfo != null">
+        EXCP_INFO,
+      </if>
+      <if test="fileCreateStatus != null">
+        FILE_CREATE_STATUS,
+      </if>
+      <if test="fileApproveStatus != null">
+        FILE_APPROVE_STATUS,
+      </if>
+      <if test="monthLabelDate != null">
+        MONTH_LABEL_DATE,
+      </if>
+      <if test="dayLabelDate != null">
+        DAY_LABEL_DATE,
+      </if>
+      <if test="listMaxNum != null">
+        LIST_MAX_NUM,
+      </if>
+      <if test="duplicateNum != null">
+        DUPLICATE_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subgroupListId != null">
+        #{subgroupListId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataDate != null">
+        #{dataDate,jdbcType=VARCHAR},
+      </if>
+      <if test="subgroupId != null">
+        #{subgroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="customNum != null">
+        #{customNum,jdbcType=INTEGER},
+      </if>
+      <if test="incrementNum != null">
+        #{incrementNum,jdbcType=INTEGER},
+      </if>
+      <if test="decrementNum != null">
+        #{decrementNum,jdbcType=INTEGER},
+      </if>
+      <if test="dataStatus != null">
+        #{dataStatus,jdbcType=INTEGER},
+      </if>
+      <if test="dataTime != null">
+        #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="excpInfo != null">
+        #{excpInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCreateStatus != null">
+        #{fileCreateStatus,jdbcType=INTEGER},
+      </if>
+      <if test="fileApproveStatus != null">
+        #{fileApproveStatus,jdbcType=INTEGER},
+      </if>
+      <if test="monthLabelDate != null">
+        #{monthLabelDate,jdbcType=VARCHAR},
+      </if>
+      <if test="dayLabelDate != null">
+        #{dayLabelDate,jdbcType=VARCHAR},
+      </if>
+      <if test="listMaxNum != null">
+        #{listMaxNum,jdbcType=INTEGER},
+      </if>
+      <if test="duplicateNum != null">
+        #{duplicateNum,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

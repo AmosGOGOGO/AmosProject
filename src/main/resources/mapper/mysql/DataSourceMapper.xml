@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ai.rti.ic.grp.dao.IDataSourceDao">
+    <!-- 查询数据源清单列表 -->
+
+    <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.entity.DataSource">
+        <id column="DATA_SOURCE_ID" jdbcType="INTEGER" property="dataSourceId" />
+        <result column="DATA_SOURCE_NAME" jdbcType="VARCHAR" property="dataSourceName" />
+        <result column="DATA_SOURCE_TYPE" jdbcType="VARCHAR" property="dataSourceType" />
+        <result column="DATA_SOURCE_IP" jdbcType="VARCHAR" property="dataSourceIp" />
+        <result column="DATA_SOURCE_PORT" jdbcType="INTEGER" property="dataSourcePort" />
+        <result column="SCHEMA_VALUE" jdbcType="VARCHAR" property="schemaValue" />
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+        <result column="CONNECTION_STATE" jdbcType="INTEGER" property="connectionState" />
+        <result column="CITY_ID" jdbcType="VARCHAR" property="cityId" />
+        <result column="STATUS_CD" jdbcType="VARCHAR" property="statusCd" />
+        <result column="CREATE_STAFF" jdbcType="INTEGER" property="createStaff" />
+        <result column="UPDATE_STAFF" jdbcType="INTEGER" property="updateStaff" />
+        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="STATUS_DATE" jdbcType="TIMESTAMP" property="statusDate" />
+        <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+        <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    </resultMap>
+
+    <select id="getDataSourceList" parameterType="com.ai.rti.ic.grp.entity.DataSource" resultMap="BaseResultMap">
+
+      SELECT
+      	  DATA_SOURCE_ID ,
+	      DATA_SOURCE_NAME ,
+      	  DATA_SOURCE_TYPE ,
+      	  DATA_SOURCE_IP ,
+      	  DATA_SOURCE_PORT ,
+      	  SCHEMA_VALUE ,
+      	  CONNECTION_STATE ,
+          USER_NAME ,
+          PASSWORD ,
+          CITY_ID ,
+      	  STATUS_CD ,
+      	  CREATE_STAFF ,
+      	  CREATE_DATE ,
+      	  REMARK
+      FROM data_source 
+      where 1=1
+      <if test="cityId !='801' and cityId != '' and cityId != null ">
+       	 AND CITY_ID = #{cityId}
+      </if>
+      <if test="connectionState != null">
+      	 AND CONNECTION_STATE = #{connectionState}
+      </if>
+      <if test="statusCd != null and statusCd != ''">
+      	 AND STATUS_CD = #{statusCd}
+      </if>
+       <if test="dataSourceId != null">
+      	 AND DATA_SOURCE_ID = #{dataSourceId}
+      </if>
+      <if test="dataSourceName != null and dataSourceName != ''">
+      	 AND DATA_SOURCE_NAME  LIKE "%"#{dataSourceName}"%"
+      </if>
+      <if test="dataSourceType != null and dataSourceType != ''">
+      	 AND DATA_SOURCE_TYPE = #{dataSourceType}
+      </if>
+    </select>
+    
+     <!-- 获取数据连接集群kerberos认证配置 -->
+	 <select id="getDataSourceAuthConf" parameterType="com.ai.rti.ic.grp.entity.DataSourceAuthConf" resultType="com.ai.rti.ic.grp.entity.DataSourceAuthConf">
+
+			SELECT
+			DATA_SOURCE_ID dataSourceId,
+			HDP_SEC_AUTH hdpSecAuth,
+			KEYTAB_FILE keytabFile,
+			KERBEROS_PRINCIPAL kerberosPrincipal
+			FROM
+			data_source_auth_conf
+			WHERE 1=1
+			 <if test="dataSourceId != null">
+		      	 AND DATA_SOURCE_ID = #{dataSourceId}
+		       </if>
+	 </select>
+
+</mapper>

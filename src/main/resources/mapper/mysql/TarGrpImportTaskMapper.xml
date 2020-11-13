@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.dao.ITarGrpImportTaskDao">
+    <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.entity.TarGrpImportTask">
+        <id column="task_id" jdbcType="INTEGER" property="taskId"/>
+        <result column="tar_grp_id" jdbcType="VARCHAR" property="tarGrpId"/>
+        <result column="tar_grp_name" jdbcType="VARCHAR" property="tarGrpName"/>
+        <result column="tar_grp_desc" jdbcType="VARCHAR" property="tarGrpDesc"/>
+        <result column="tar_grp_type" jdbcType="INTEGER" property="tarGrpType"/>
+        <result column="tar_grp_data_type" jdbcType="INTEGER" property="tarGrpDataType"/>
+        <result column="data_source_id" jdbcType="INTEGER" property="dataSourceId"/>
+        <result column="update_cycle" jdbcType="INTEGER" property="updateCycle"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="is_private" jdbcType="INTEGER" property="isPrivate"/>
+        <result column="tar_grp_net_type" jdbcType="INTEGER" property="tarGrpNetType"/>
+        <result column="dispatch_type_code" jdbcType="INTEGER" property="dispatchTypeCode"/>
+        <result column="tar_grp_entend_col" jdbcType="VARCHAR" property="tarGrpEntendCol"/>
+        <result column="tar_grp_key" jdbcType="VARCHAR" property="tarGrpKey"/>
+        <result column="table_relation" jdbcType="VARCHAR" property="tableRelation"/>
+        <result column="rules_json" jdbcType="VARCHAR" property="rulesJson"/>
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_url" jdbcType="VARCHAR" property="fileUrl"/>
+        <result column="data_date" jdbcType="VARCHAR" property="dataDate"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="city_id" jdbcType="VARCHAR" property="cityId"/>
+        <result column="status_cd" jdbcType="VARCHAR" property="statusCd"/>
+        <result column="errors_log" jdbcType="VARCHAR" property="errorsLog"/>
+        <result column="create_staff" jdbcType="VARCHAR" property="createStaff"/>
+        <result column="update_staff" jdbcType="VARCHAR" property="updateStaff"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="status_date" jdbcType="TIMESTAMP" property="statusDate"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="is_tactic" jdbcType="INTEGER" property="isTactic"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        TASK_ID, TAR_GRP_ID, TAR_GRP_NAME, TAR_GRP_DESC, TAR_GRP_TYPE, TAR_GRP_DATA_TYPE,
+        DATA_SOURCE_ID, UPDATE_CYCLE, CREATE_TIME, IS_PRIVATE, TAR_GRP_NET_TYPE, TAR_GRP_ENTEND_COL,dispatch_type_code,
+        TAR_GRP_KEY, TABLE_RELATION, RULES_JSON, FILE_NAME, FILE_URL, DATA_DATE, STATUS, CITY_ID,
+        STATUS_CD, ERRORS_LOG, CREATE_STAFF, UPDATE_STAFF, CREATE_DATE, STATUS_DATE, UPDATE_DATE,IS_TACTIC
+    </sql>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from tar_grp_import_task
+        where task_id = #{taskId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.ai.rti.ic.grp.entity.TarGrpImportTask">
+        insert into tar_grp_import_task (task_id, tar_grp_id, tar_grp_name,
+        tar_grp_desc, tar_grp_type, tar_grp_data_type,
+        data_source_id, update_cycle, create_time,
+        is_private, tar_grp_net_type, tar_grp_entend_col,
+        tar_grp_key, table_relation, rules_json,
+        file_name, file_url, data_date,
+        status, city_id, status_cd,
+        errors_log, create_staff, update_staff,
+        create_date, status_date, update_date
+        )
+        values (#{taskId,jdbcType=INTEGER}, #{tarGrpId,jdbcType=VARCHAR}, #{tarGrpName,jdbcType=VARCHAR},
+        #{tarGrpDesc,jdbcType=VARCHAR}, #{tarGrpType,jdbcType=INTEGER}, #{tarGrpDataType,jdbcType=INTEGER},
+        #{dataSourceId,jdbcType=INTEGER}, #{updateCycle,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR},
+        #{isPrivate,jdbcType=INTEGER}, #{tarGrpNetType,jdbcType=INTEGER}, #{tarGrpEntendCol,jdbcType=VARCHAR},
+        #{tarGrpKey,jdbcType=VARCHAR}, #{tableRelation,jdbcType=VARCHAR}, #{rulesJson,jdbcType=VARCHAR},
+        #{fileName,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{dataDate,jdbcType=VARCHAR},
+        #{status,jdbcType=INTEGER}, #{cityId,jdbcType=VARCHAR}, #{statusCd,jdbcType=VARCHAR},
+        #{errorsLog,jdbcType=VARCHAR}, #{createStaff,jdbcType=VARCHAR}, #{updateStaff,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{statusDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.ai.rti.ic.grp.entity.TarGrpImportTask">
+        insert into tar_grp_import_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="tarGrpId != null">
+                tar_grp_id,
+            </if>
+            <if test="tarGrpName != null">
+                tar_grp_name,
+            </if>
+            <if test="tarGrpDesc != null">
+                tar_grp_desc,
+            </if>
+            <if test="tarGrpType != null">
+                tar_grp_type,
+            </if>
+            <if test="tarGrpDataType != null">
+                tar_grp_data_type,
+            </if>
+            <if test="dataSourceId != null">
+                data_source_id,
+            </if>
+            <if test="updateCycle != null">
+                update_cycle,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="isPrivate != null">
+                is_private,
+            </if>
+            <if test="tarGrpNetType != null">
+                tar_grp_net_type,
+            </if>
+            <if test="tarGrpEntendCol != null">
+                tar_grp_entend_col,
+            </if>
+            <if test="tarGrpKey != null">
+                tar_grp_key,
+            </if>
+            <if test="tableRelation != null">
+                table_relation,
+            </if>
+            <if test="rulesJson != null">
+                rules_json,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="fileUrl != null">
+                file_url,
+            </if>
+            <if test="dataDate != null">
+                data_date,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="statusCd != null">
+                status_cd,
+            </if>
+            <if test="errorsLog != null">
+                errors_log,
+            </if>
+            <if test="createStaff != null">
+                create_staff,
+            </if>
+            <if test="updateStaff != null">
+                update_staff,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="statusDate != null">
+                status_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="taskId != null">
+                #{taskId,jdbcType=INTEGER},
+            </if>
+            <if test="tarGrpId != null">
+                #{tarGrpId,jdbcType=VARCHAR},
+            </if>
+            <if test="tarGrpName != null">
+                #{tarGrpName,jdbcType=VARCHAR},
+            </if>
+            <if test="tarGrpDesc != null">
+                #{tarGrpDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="tarGrpType != null">
+                #{tarGrpType,jdbcType=INTEGER},
+            </if>
+            <if test="tarGrpDataType != null">
+                #{tarGrpDataType,jdbcType=INTEGER},
+            </if>
+            <if test="dataSourceId != null">
+                #{dataSourceId,jdbcType=INTEGER},
+            </if>
+            <if test="updateCycle != null">
+                #{updateCycle,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="isPrivate != null">
+                #{isPrivate,jdbcType=INTEGER},
+            </if>
+            <if test="tarGrpNetType != null">
+                #{tarGrpNetType,jdbcType=INTEGER},
+            </if>
+            <if test="tarGrpEntendCol != null">
+                #{tarGrpEntendCol,jdbcType=VARCHAR},
+            </if>
+            <if test="tarGrpKey != null">
+                #{tarGrpKey,jdbcType=VARCHAR},
+            </if>
+            <if test="tableRelation != null">
+                #{tableRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="rulesJson != null">
+                #{rulesJson,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileUrl != null">
+                #{fileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="dataDate != null">
+                #{dataDate,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=VARCHAR},
+            </if>
+            <if test="statusCd != null">
+                #{statusCd,jdbcType=VARCHAR},
+            </if>
+            <if test="errorsLog != null">
+                #{errorsLog,jdbcType=VARCHAR},
+            </if>
+            <if test="createStaff != null">
+                #{createStaff,jdbcType=VARCHAR},
+            </if>
+            <if test="updateStaff != null">
+                #{updateStaff,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="statusDate != null">
+                #{statusDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ai.rti.ic.grp.entity.TarGrpImportTask">
+        update tar_grp_import_task
+        <set>
+            <if test="tarGrpId != null">
+                tar_grp_id = #{tarGrpId,jdbcType=VARCHAR},
+            </if>
+            <if test="tarGrpName != null">
+                tar_grp_name = #{tarGrpName,jdbcType=VARCHAR},
+            </if>
+            <if test="tarGrpDesc != null">
+                tar_grp_desc = #{tarGrpDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="tarGrpType != null">
+                tar_grp_type = #{tarGrpType,jdbcType=INTEGER},
+            </if>
+            <if test="tarGrpDataType != null">
+                tar_grp_data_type = #{tarGrpDataType,jdbcType=INTEGER},
+            </if>
+            <if test="dataSourceId != null">
+                data_source_id = #{dataSourceId,jdbcType=INTEGER},
+            </if>
+            <if test="updateCycle != null">
+                update_cycle = #{updateCycle,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="isPrivate != null">
+                is_private = #{isPrivate,jdbcType=INTEGER},
+            </if>
+            <if test="tarGrpNetType != null">
+                tar_grp_net_type = #{tarGrpNetType,jdbcType=INTEGER},
+            </if>
+            <if test="tarGrpEntendCol != null">
+                tar_grp_entend_col = #{tarGrpEntendCol,jdbcType=VARCHAR},
+            </if>
+            <if test="tarGrpKey != null">
+                tar_grp_key = #{tarGrpKey,jdbcType=VARCHAR},
+            </if>
+            <if test="tableRelation != null">
+                table_relation = #{tableRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="rulesJson != null">
+                rules_json = #{rulesJson,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileUrl != null">
+                file_url = #{fileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="dataDate != null">
+                data_date = #{dataDate,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId,jdbcType=VARCHAR},
+            </if>
+            <if test="statusCd != null">
+                status_cd = #{statusCd,jdbcType=VARCHAR},
+            </if>
+            <if test="errorsLog != null">
+                errors_log = #{errorsLog,jdbcType=VARCHAR},
+            </if>
+            <if test="createStaff != null">
+                create_staff = #{createStaff,jdbcType=VARCHAR},
+            </if>
+            <if test="updateStaff != null">
+                update_staff = #{updateStaff,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="statusDate != null">
+                status_date = #{statusDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where task_id = #{taskId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ai.rti.ic.grp.entity.TarGrpImportTask">
+        update tar_grp_import_task
+        set tar_grp_id = #{tarGrpId,jdbcType=VARCHAR},
+          tar_grp_name = #{tarGrpName,jdbcType=VARCHAR},
+          tar_grp_desc = #{tarGrpDesc,jdbcType=VARCHAR},
+          tar_grp_type = #{tarGrpType,jdbcType=INTEGER},
+          tar_grp_data_type = #{tarGrpDataType,jdbcType=INTEGER},
+          data_source_id = #{dataSourceId,jdbcType=INTEGER},
+          update_cycle = #{updateCycle,jdbcType=INTEGER},
+          create_time = #{createTime,jdbcType=VARCHAR},
+          is_private = #{isPrivate,jdbcType=INTEGER},
+          tar_grp_net_type = #{tarGrpNetType,jdbcType=INTEGER},
+          tar_grp_entend_col = #{tarGrpEntendCol,jdbcType=VARCHAR},
+          tar_grp_key = #{tarGrpKey,jdbcType=VARCHAR},
+          table_relation = #{tableRelation,jdbcType=VARCHAR},
+          rules_json = #{rulesJson,jdbcType=VARCHAR},
+          file_name = #{fileName,jdbcType=VARCHAR},
+          file_url = #{fileUrl,jdbcType=VARCHAR},
+          data_date = #{dataDate,jdbcType=VARCHAR},
+          status = #{status,jdbcType=INTEGER},
+          city_id = #{cityId,jdbcType=VARCHAR},
+          status_cd = #{statusCd,jdbcType=VARCHAR},
+          errors_log = #{errorsLog,jdbcType=VARCHAR},
+          create_staff = #{createStaff,jdbcType=VARCHAR},
+          update_staff = #{updateStaff,jdbcType=VARCHAR},
+          create_date = #{createDate,jdbcType=TIMESTAMP},
+          status_date = #{statusDate,jdbcType=TIMESTAMP},
+          update_date = #{updateDate,jdbcType=TIMESTAMP}
+        where task_id = #{taskId,jdbcType=INTEGER}
+    </update>
+
+    <!--按条件查询-->
+    <select id="selectSelective" parameterType="com.ai.rti.ic.grp.entity.TarGrpImportTask" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from tar_grp_import_task task
+        where 1 = 1
+        AND EXISTS
+        (SELECT
+        a.status
+        FROM
+        ci_custom_group_info  a
+        WHERE a.status = 1
+        AND a.custom_group_id = task.tar_grp_id)
+        <if test="taskId != null and taskId != ''">
+            and task_id= #{taskId}
+        </if>
+        <if test="tarGrpId != null and tarGrpId != ''">
+            and tar_grp_id= #{tarGrpId}
+        </if>
+        <if test="tarGrpName != null and tarGrpName != ''">
+            and tar_grp_name= #{tarGrpName}
+        </if>
+        <if test="tarGrpDesc != null and tarGrpDesc != ''">
+            and tar_grp_desc= #{tarGrpDesc}
+        </if>
+        <if test="tarGrpType != null and tarGrpType != ''">
+            and tar_grp_type= #{tarGrpType}
+        </if>
+        <if test="tarGrpDataType != null and tarGrpDataType != ''">
+            and tar_grp_data_type= #{tarGrpDataType}
+        </if>
+        <if test="dataSourceId != null and dataSourceId != ''">
+            and data_source_id= #{dataSourceId}
+        </if>
+        <if test="updateCycle != null and updateCycle != ''">
+            and update_cycle= #{updateCycle}
+        </if>
+        <if test="createTime != null and createTime != ''">
+            and create_time= #{createTime}
+        </if>
+        <if test="isPrivate != null and isPrivate != ''">
+            and is_private= #{isPrivate}
+        </if>
+        <if test="tarGrpNetType != null and tarGrpNetType != ''">
+            and tar_grp_net_type= #{tarGrpNetType}
+        </if>
+        <if test="tarGrpEntendCol != null and tarGrpEntendCol != ''">
+            and tar_grp_entend_col= #{tarGrpEntendCol}
+        </if>
+        <if test="tarGrpKey != null and tarGrpKey != ''">
+            and tar_grp_key= #{tarGrpKey}
+        </if>
+        <if test="tableRelation != null and tableRelation != ''">
+            and table_relation= #{tableRelation}
+        </if>
+        <if test="fileName != null and fileName != ''">
+            and file_name= #{fileName}
+        </if>
+        <if test="fileUrl != null and fileUrl != ''">
+            and file_url= #{fileUrl}
+        </if>
+        <if test="dataDate != null and dataDate != ''">
+            and data_date= #{dataDate}
+        </if>
+        <if test="status != null and status != ''">
+            and status= #{status}
+        </if>
+        <if test="cityId != null and cityId != ''">
+            and city_id= #{cityId}
+        </if>
+        <if test="statusCd != null and statusCd != ''">
+            and status_cd= #{statusCd}
+        </if>
+        <if test="errorsLog != null and errorsLog != ''">
+            and errors_log= #{errorsLog}
+        </if>
+        <if test="createStaff != null and createStaff != ''">
+            and create_staff= #{createStaff}
+        </if>
+        <if test="updateStaff != null and updateStaff != ''">
+            and update_staff= #{updateStaff}
+        </if>
+        <if test="createDate != null and createDate != ''">
+            and create_date= #{createDate}
+        </if>
+        <if test="statusDate != null and statusDate != ''">
+            and status_date= #{statusDate}
+        </if>
+        <if test="updateDate != null and updateDate != ''">
+            and update_date= #{updateDate}
+        </if>
+    </select>
+
+
+    <!--取出一个待创建的任务-->
+    <select id="getTarGrpTask" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tar_grp_import_task task
+        WHERE STATUS = 1
+        AND status_cd = 1000
+        AND EXISTS
+        (SELECT
+        a.status
+        FROM
+        ci_custom_group_info
+        a
+        WHERE a.status = 1
+        AND a.custom_group_id = task.tar_grp_id)
+        order by create_time
+        LIMIT 1
+
+    </select>
+
+
+
+
+    <!--按条件查询-->
+    <select id="selectSelectiveLimit" parameterType="com.ai.rti.ic.grp.entity.TarGrpImportTask" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from tar_grp_import_task
+        where 1 = 1
+        <if test="taskId != null and taskId != ''">
+            and task_id= #{taskId}
+        </if>
+        <if test="tarGrpId != null and tarGrpId != ''">
+            and tar_grp_id= #{tarGrpId}
+        </if>
+        <if test="tarGrpName != null and tarGrpName != ''">
+            and tar_grp_name= #{tarGrpName}
+        </if>
+        <if test="tarGrpDesc != null and tarGrpDesc != ''">
+            and tar_grp_desc= #{tarGrpDesc}
+        </if>
+        <if test="tarGrpType != null and tarGrpType != ''">
+            and tar_grp_type= #{tarGrpType}
+        </if>
+        <if test="tarGrpDataType != null and tarGrpDataType != ''">
+            and tar_grp_data_type= #{tarGrpDataType}
+        </if>
+        <if test="dataSourceId != null and dataSourceId != ''">
+            and data_source_id= #{dataSourceId}
+        </if>
+        <if test="updateCycle != null and updateCycle != ''">
+            and update_cycle= #{updateCycle}
+        </if>
+        <if test="createTime != null and createTime != ''">
+            and create_time= #{createTime}
+        </if>
+        <if test="isPrivate != null and isPrivate != ''">
+            and is_private= #{isPrivate}
+        </if>
+        <if test="tarGrpNetType != null and tarGrpNetType != ''">
+            and tar_grp_net_type= #{tarGrpNetType}
+        </if>
+        <if test="tarGrpEntendCol != null and tarGrpEntendCol != ''">
+            and tar_grp_entend_col= #{tarGrpEntendCol}
+        </if>
+        <if test="tarGrpKey != null and tarGrpKey != ''">
+            and tar_grp_key= #{tarGrpKey}
+        </if>
+        <if test="tableRelation != null and tableRelation != ''">
+            and table_relation= #{tableRelation}
+        </if>
+        <if test="fileName != null and fileName != ''">
+            and file_name= #{fileName}
+        </if>
+        <if test="fileUrl != null and fileUrl != ''">
+            and file_url= #{fileUrl}
+        </if>
+        <if test="dataDate != null and dataDate != ''">
+            and data_date= #{dataDate}
+        </if>
+        <if test="status != null and status != ''">
+            and status= #{status}
+        </if>
+        <if test="cityId != null and cityId != ''">
+            and city_id= #{cityId}
+        </if>
+        <if test="statusCd != null and statusCd != ''">
+            and status_cd= #{statusCd}
+        </if>
+        <if test="errorsLog != null and errorsLog != ''">
+            and errors_log= #{errorsLog}
+        </if>
+        <if test="createStaff != null and createStaff != ''">
+            and create_staff= #{createStaff}
+        </if>
+        <if test="updateStaff != null and updateStaff != ''">
+            and update_staff= #{updateStaff}
+        </if>
+        <if test="createDate != null and createDate != ''">
+            and create_date= #{createDate}
+        </if>
+        <if test="statusDate != null and statusDate != ''">
+            and status_date= #{statusDate}
+        </if>
+        <if test="updateDate != null and updateDate != ''">
+            and update_date= #{updateDate}
+        </if>
+
+        LIMIT 10;
+
+
+    </select>
+
+
+
+</mapper>

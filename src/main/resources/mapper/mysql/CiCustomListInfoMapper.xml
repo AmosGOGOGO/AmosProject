@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.dao.ICiCustomListInfoDao">
+    <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.entity.CiCustomListInfo">
+        <result column="LIST_TABLE_NAME" jdbcType="VARCHAR" property="listTableName"/>
+        <result column="DATA_DATE" jdbcType="VARCHAR" property="dataDate"/>
+        <result column="CUSTOM_GROUP_ID" jdbcType="VARCHAR" property="customGroupId"/>
+        <result column="CUSTOM_NUM" jdbcType="INTEGER" property="customNum"/>
+        <result column="increment_num" jdbcType="INTEGER" property="incrementNum"/>
+        <result column="decrement_num" jdbcType="INTEGER" property="decrementNum"/>
+        <result column="DATA_STATUS" jdbcType="INTEGER" property="dataStatus"/>
+        <result column="DATA_TIME" jdbcType="TIMESTAMP" property="dataTime"/>
+        <result column="EXCP_INFO" jdbcType="VARCHAR" property="excpInfo"/>
+        <result column="FILE_CREATE_STATUS" jdbcType="INTEGER" property="fileCreateStatus"/>
+        <result column="FILE_APPROVE_STATUS" jdbcType="INTEGER" property="fileApproveStatus"/>
+        <result column="MONTH_LABEL_DATE" jdbcType="VARCHAR" property="monthLabelDate"/>
+        <result column="DAY_LABEL_DATE" jdbcType="VARCHAR" property="dayLabelDate"/>
+        <result column="LIST_MAX_NUM" jdbcType="INTEGER" property="listMaxNum"/>
+    </resultMap>
+
+    <sql id="All_Column">
+
+      LIST_TABLE_NAME, DATA_DATE, CUSTOM_GROUP_ID,
+      CUSTOM_NUM, increment_num, decrement_num,
+      DATA_STATUS, DATA_TIME, EXCP_INFO,
+      FILE_CREATE_STATUS, FILE_APPROVE_STATUS, MONTH_LABEL_DATE,
+      DAY_LABEL_DATE, LIST_MAX_NUM,END_TIME
+
+  </sql>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.ai.rti.ic.grp.entity.CiCustomListInfo">
+
+        select
+        <include refid="All_Column"/>
+        from ci_custom_list_info
+        where 1 = 1
+        <if test="listTableName != null and listTableName != ''">
+            and LIST_TABLE_NAME= #{listTableName}
+        </if>
+        <if test="dataDate != null and dataDate != ''">
+            and DATA_DATE= #{dataDate}
+        </if>
+        <if test="customGroupId != null and customGroupId != ''">
+            and CUSTOM_GROUP_ID= #{customGroupId}
+        </if>
+        <if test="customNum != null and customNum != ''">
+            and CUSTOM_NUM= #{customNum}
+        </if>
+        <if test="incrementNum != null and incrementNum != ''">
+            and increment_num= #{incrementNum}
+        </if>
+        <if test="decrementNum != null and decrementNum != ''">
+            and decrement_num= #{decrementNum}
+        </if>
+        <if test="dataStatus != null and dataStatus != ''">
+            and DATA_STATUS= #{dataStatus}
+        </if>
+        <if test="dataTime != null and dataTime != ''">
+            and DATA_TIME= #{dataTime}
+        </if>
+        <if test="excpInfo != null and excpInfo != ''">
+            and EXCP_INFO= #{excpInfo}
+        </if>
+        <if test="fileCreateStatus != null and fileCreateStatus != ''">
+            and FILE_CREATE_STATUS= #{fileCreateStatus}
+        </if>
+        <if test="fileApproveStatus != null and fileApproveStatus != ''">
+            and FILE_APPROVE_STATUS= #{fileApproveStatus}
+        </if>
+        <if test="monthLabelDate != null and monthLabelDate != ''">
+            and MONTH_LABEL_DATE= #{monthLabelDate}
+        </if>
+        <if test="dayLabelDate != null and dayLabelDate != ''">
+            and DAY_LABEL_DATE= #{dayLabelDate}
+        </if>
+        <if test="listMaxNum != null and listMaxNum != ''">
+            and LIST_MAX_NUM= #{listMaxNum}
+        </if>
+
+        order by DATA_DATE DESC
+
+    </select>
+
+
+    <insert id="insertSelective" parameterType="com.ai.rti.ic.grp.entity.CiCustomListInfo">
+        insert into ci_custom_list_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="listTableName != null">
+                LIST_TABLE_NAME,
+            </if>
+            <if test="dataDate != null">
+                DATA_DATE,
+            </if>
+            <if test="customGroupId != null">
+                CUSTOM_GROUP_ID,
+            </if>
+            <if test="customNum != null">
+                CUSTOM_NUM,
+            </if>
+            <if test="incrementNum != null">
+                increment_num,
+            </if>
+            <if test="decrementNum != null">
+                decrement_num,
+            </if>
+            <if test="dataStatus != null">
+                DATA_STATUS,
+            </if>
+            <if test="dataTime != null">
+                DATA_TIME,
+            </if>
+            <if test="excpInfo != null">
+                EXCP_INFO,
+            </if>
+            <if test="fileCreateStatus != null">
+                FILE_CREATE_STATUS,
+            </if>
+            <if test="fileApproveStatus != null">
+                FILE_APPROVE_STATUS,
+            </if>
+            <if test="monthLabelDate != null">
+                MONTH_LABEL_DATE,
+            </if>
+            <if test="dayLabelDate != null">
+                DAY_LABEL_DATE,
+            </if>
+            <if test="listMaxNum != null">
+                LIST_MAX_NUM,
+            </if>
+            <if test="createTime != null">
+                END_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="listTableName != null">
+                #{listTableName,jdbcType=VARCHAR},
+            </if>
+            <if test="dataDate != null">
+                #{dataDate,jdbcType=VARCHAR},
+            </if>
+            <if test="customGroupId != null">
+                #{customGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="customNum != null">
+                #{customNum,jdbcType=INTEGER},
+            </if>
+            <if test="incrementNum != null">
+                #{incrementNum,jdbcType=INTEGER},
+            </if>
+            <if test="decrementNum != null">
+                #{decrementNum,jdbcType=INTEGER},
+            </if>
+            <if test="dataStatus != null">
+                #{dataStatus,jdbcType=INTEGER},
+            </if>
+            <if test="dataTime != null">
+                #{dataTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="excpInfo != null">
+                #{excpInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="fileCreateStatus != null">
+                #{fileCreateStatus,jdbcType=INTEGER},
+            </if>
+            <if test="fileApproveStatus != null">
+                #{fileApproveStatus,jdbcType=INTEGER},
+            </if>
+            <if test="monthLabelDate != null">
+                #{monthLabelDate,jdbcType=VARCHAR},
+            </if>
+            <if test="dayLabelDate != null">
+                #{dayLabelDate,jdbcType=VARCHAR},
+            </if>
+            <if test="listMaxNum != null">
+                #{listMaxNum,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateSelective" parameterType="com.ai.rti.ic.grp.entity.CiCustomListInfo">
+
+        update ci_custom_list_info
+
+        <set>
+
+            <if test="listTableName != null">
+                LIST_TABLE_NAME = #{listTableName,jdbcType=VARCHAR},
+            </if>
+            <if test="dataDate != null">
+                DATA_DATE= #{dataDate,jdbcType=VARCHAR},
+            </if>
+            <if test="customGroupId != null">
+                CUSTOM_GROUP_ID= #{customGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="customNum != null">
+                CUSTOM_NUM= #{customNum,jdbcType=INTEGER},
+            </if>
+            <if test="incrementNum != null">
+                increment_num= #{incrementNum,jdbcType=INTEGER},
+            </if>
+            <if test="decrementNum != null">
+                decrement_num= #{decrementNum,jdbcType=INTEGER},
+            </if>
+            <if test="dataStatus != null">
+                DATA_STATUS= #{dataStatus,jdbcType=INTEGER},
+            </if>
+            <if test="dataTime != null">
+                DATA_TIME= #{dataTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="excpInfo != null">
+                EXCP_INFO= #{excpInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="fileCreateStatus != null">
+                FILE_CREATE_STATUS=#{fileCreateStatus,jdbcType=INTEGER},
+            </if>
+            <if test="fileApproveStatus != null">
+                FILE_APPROVE_STATUS=#{fileApproveStatus,jdbcType=INTEGER},
+            </if>
+            <if test="monthLabelDate != null">
+                MONTH_LABEL_DATE= #{monthLabelDate,jdbcType=VARCHAR},
+            </if>
+            <if test="dayLabelDate != null">
+                DAY_LABEL_DATE= #{dayLabelDate,jdbcType=VARCHAR},
+            </if>
+            <if test="listMaxNum != null">
+                LIST_MAX_NUM= #{listMaxNum,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                END_TIME= #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LIST_TABLE_NAME = #{listTableName,jdbcType=VARCHAR} and CUSTOM_GROUP_ID= #{customGroupId,jdbcType=VARCHAR}
+        and DATA_DATE= #{dataDate,jdbcType=VARCHAR}
+
+    </update>
+
+
+</mapper>

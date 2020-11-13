@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.dao.ICiGroupAttrRelNewDao">
+  <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.entity.CiGroupAttrRelNew">
+    <id column="CUSTOM_GROUP_ID" jdbcType="VARCHAR" property="customGroupId" />
+    <id column="ATTR_COL" jdbcType="VARCHAR" property="attrCol" />
+    <id column="MODIFY_TIME" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="ATTR_COL_TYPE" jdbcType="VARCHAR" property="attrColType" />
+    <result column="ATTR_COL_NAME" jdbcType="VARCHAR" property="attrColName" />
+    <result column="ATTR_SOURCE" jdbcType="SMALLINT" property="attrSource" />
+    <result column="LABEL_OR_CUSTOM_ID" jdbcType="VARCHAR" property="labelOrCustomId" />
+    <result column="LABEL_OR_CUSTOM_COLUMN" jdbcType="VARCHAR" property="labelOrCustomColumn" />
+    <result column="IS_VERTICAL_ATTR" jdbcType="SMALLINT" property="isVerticalAttr" />
+    <result column="LIST_TABLE_NAME" jdbcType="VARCHAR" property="listTableName" />
+    <result column="STATUS" jdbcType="SMALLINT" property="status" />
+    <result column="ATTR_VAL" jdbcType="VARCHAR" property="attrVal" />
+    <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+    <result column="SORT_TYPE" jdbcType="VARCHAR" property="sortType" />
+    <result column="SORT_NUM" jdbcType="SMALLINT" property="sortNum" />
+    <result column="col_type_code" jdbcType="VARCHAR" property="colTypeCode" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    CUSTOM_GROUP_ID, ATTR_COL, MODIFY_TIME, ATTR_COL_TYPE, ATTR_COL_NAME, ATTR_SOURCE, 
+    LABEL_OR_CUSTOM_ID, LABEL_OR_CUSTOM_COLUMN, IS_VERTICAL_ATTR, LIST_TABLE_NAME, STATUS, 
+    ATTR_VAL, TABLE_NAME, SORT_TYPE, SORT_NUM, col_type_code
+  </sql>
+
+  <insert id="insertSelective" parameterType="com.ai.rti.ic.grp.entity.CiGroupAttrRelNew">
+    insert into ci_group_attr_rel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customGroupId != null">
+        CUSTOM_GROUP_ID,
+      </if>
+      <if test="attrCol != null">
+        ATTR_COL,
+      </if>
+      <if test="modifyTime != null">
+        MODIFY_TIME,
+      </if>
+      <if test="attrColType != null">
+        ATTR_COL_TYPE,
+      </if>
+      <if test="attrColName != null">
+        ATTR_COL_NAME,
+      </if>
+      <if test="attrSource != null">
+        ATTR_SOURCE,
+      </if>
+      <if test="labelOrCustomId != null">
+        LABEL_OR_CUSTOM_ID,
+      </if>
+      <if test="labelOrCustomColumn != null">
+        LABEL_OR_CUSTOM_COLUMN,
+      </if>
+      <if test="isVerticalAttr != null">
+        IS_VERTICAL_ATTR,
+      </if>
+      <if test="listTableName != null">
+        LIST_TABLE_NAME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="attrVal != null">
+        ATTR_VAL,
+      </if>
+      <if test="tableName != null">
+        TABLE_NAME,
+      </if>
+      <if test="sortType != null">
+        SORT_TYPE,
+      </if>
+      <if test="sortNum != null">
+        SORT_NUM,
+      </if>
+      <if test="colTypeCode != null">
+        col_type_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customGroupId != null">
+        #{customGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="attrCol != null">
+        #{attrCol,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attrColType != null">
+        #{attrColType,jdbcType=VARCHAR},
+      </if>
+      <if test="attrColName != null">
+        #{attrColName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrSource != null">
+        #{attrSource,jdbcType=SMALLINT},
+      </if>
+      <if test="labelOrCustomId != null">
+        #{labelOrCustomId,jdbcType=VARCHAR},
+      </if>
+      <if test="labelOrCustomColumn != null">
+        #{labelOrCustomColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="isVerticalAttr != null">
+        #{isVerticalAttr,jdbcType=SMALLINT},
+      </if>
+      <if test="listTableName != null">
+        #{listTableName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="attrVal != null">
+        #{attrVal,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="sortType != null">
+        #{sortType,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNum != null">
+        #{sortNum,jdbcType=SMALLINT},
+      </if>
+      <if test="colTypeCode != null">
+        #{colTypeCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

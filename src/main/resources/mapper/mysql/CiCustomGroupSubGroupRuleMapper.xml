@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.dao.ICiCustomGroupSubGroupRuleDao">
+    <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.entity.CiCustomGroupSubGroupRule">
+        <result column="subgroup_id" jdbcType="VARCHAR" property="subgroupId"/>
+        <result column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="subgroup_name" jdbcType="VARCHAR" property="subgroupName"/>
+        <result column="chnnlId" jdbcType="VARCHAR" property="chnnlid"/>
+        <result column="cityId" jdbcType="VARCHAR" property="cityid"/>
+        <result column="rule" jdbcType="VARCHAR" property="rule"/>
+        <result column="lua_expression" jdbcType="VARCHAR" property="luaExpression"/>
+        <result column="custom_num" jdbcType="INTEGER" property="customNum"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="activity_id" jdbcType="VARCHAR" property="activityId"/>
+        <result column="sql_condition" jdbcType="VARCHAR" property="sqlCondition"/>
+    </resultMap>
+
+    <sql id="All_Column">
+
+    subgroup_id, group_id, subgroup_name,
+    chnnlId, cityId, rule,
+    lua_expression, custom_num, remark,
+    activity_id, sql_condition
+
+  </sql>
+
+
+    <insert id="insert" parameterType="com.ai.rti.ic.grp.entity.CiCustomGroupSubGroupRule">
+    insert into ci_custom_group_subgroup_rule (subgroup_id, group_id, subgroup_name, 
+      chnnlId, cityId, rule, 
+      lua_expression, custom_num, remark, 
+      activity_id, sql_condition)
+    values (#{subgroupId,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{subgroupName,jdbcType=VARCHAR}, 
+      #{chnnlid,jdbcType=VARCHAR}, #{cityid,jdbcType=VARCHAR}, #{rule,jdbcType=VARCHAR}, 
+      #{luaExpression,jdbcType=VARCHAR}, #{customNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{activityId,jdbcType=VARCHAR}, #{sqlCondition,jdbcType=VARCHAR})
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.ai.rti.ic.grp.entity.CiCustomGroupSubGroupRule">
+        insert into ci_custom_group_subgroup_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="subgroupId != null">
+                subgroup_id,
+            </if>
+            <if test="groupId != null">
+                group_id,
+            </if>
+            <if test="subgroupName != null">
+                subgroup_name,
+            </if>
+            <if test="chnnlid != null">
+                chnnlId,
+            </if>
+            <if test="cityid != null">
+                cityId,
+            </if>
+            <if test="rule != null">
+                rule,
+            </if>
+            <if test="luaExpression != null">
+                lua_expression,
+            </if>
+            <if test="customNum != null">
+                custom_num,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="sqlCondition != null">
+                sql_condition,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="subgroupId != null">
+                #{subgroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId != null">
+                #{groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="subgroupName != null">
+                #{subgroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="chnnlid != null">
+                #{chnnlid,jdbcType=VARCHAR},
+            </if>
+            <if test="cityid != null">
+                #{cityid,jdbcType=VARCHAR},
+            </if>
+            <if test="rule != null">
+                #{rule,jdbcType=VARCHAR},
+            </if>
+            <if test="luaExpression != null">
+                #{luaExpression,jdbcType=VARCHAR},
+            </if>
+            <if test="customNum != null">
+                #{customNum,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=VARCHAR},
+            </if>
+            <if test="sqlCondition != null">
+                #{sqlCondition,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <select id="querySubCustomGroupInfos" parameterType="com.ai.rti.ic.grp.entity.CiCustomGroupSubGroupRule"
+            resultMap="BaseResultMap">
+
+        select
+        <include refid="All_Column"/>
+        from ci_custom_group_subgroup_rule where 1=1
+        <if test="groupId != null">
+            and group_id= #{groupId};
+        </if>
+        <if test="cityId != null">
+            and cityid= #{cityId};
+        </if>
+        <if test="subGroupId != null">
+            and subgroup_id= #{subGroupId};
+        </if>
+        <if test="activityId != null">
+            and activity_id= #{activityId};
+        </if>
+
+    </select>
+    
+    
+    
+    <update id="updateSubgroupRule" parameterType="com.ai.rti.ic.grp.entity.CiCustomGroupSubGroupRule">
+
+        update ci_custom_group_subgroup_rule set custom_num = #{customNum} where subgroup_id = #{subGroupId}
+
+
+    </update>
+
+
+</mapper>
