@@ -28,6 +28,7 @@ import com.ai.rti.ic.grp.utils.Config;
 import com.ai.rti.ic.grp.utils.GenerateUUID;
 import com.ai.rti.ic.grp.utils.HDFSUtil;
 import com.ai.rti.ic.grp.utils.HttpClientUtil;
+import com.ai.rti.ic.grp.utils.RandomUtil;
 import com.ai.rti.ic.grp.utils.StringUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -93,6 +94,7 @@ import org.springframework.stereotype.Service;
        e.printStackTrace();
      } 
      tabName = String.valueOf(tabName.replace("YYMMDDHHMISSTTTTTT",  "")) + convertLongMillsToYYYYMMDDHHMMSS(-1L);
+     tabName += RandomUtil.getRandom(5);
      ciCustomListInfo.setListTableName(tabName);
      ciCustomListInfo.setDataDate(dataDate);
      ciCustomListInfo.setDataTime(new Date());
