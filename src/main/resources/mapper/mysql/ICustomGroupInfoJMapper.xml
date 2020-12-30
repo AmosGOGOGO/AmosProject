@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.ci.dao.ICustomGroupInfoJDao">
+    <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.ci.entity.CiCustomGroupInfo">
+        <result column="CUSTOM_GROUP_ID" jdbcType="VARCHAR" property="customGroupId"/>
+         <result column="GROUP_ID" jdbcType="INTEGER" property="groupId"/>
+         
+        <result column="CUSTOM_GROUP_NAME" jdbcType="VARCHAR" property="customGroupName"/>
+        <result column="CUSTOM_GROUP_DESC" jdbcType="VARCHAR" property="customGroupDesc"/>
+        
+        <result column="PARENT_CUSTOM_ID" jdbcType="VARCHAR" property="parentCustomId"/>
+        <result column="UPDATE_CYCLE" jdbcType="INTEGER" property="updateCycle"/>
+        
+        <result column="CREATE_TYPE_ID" jdbcType="INTEGER" property="createTypeId"/>
+        <result column="CREATE_USER_ID" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="PROD_OPT_RULE_SHOW" jdbcType="VARCHAR" property="prodOptRuleShow"/>
+        
+        <result column="LABEL_OPT_RULE_SHOW" jdbcType="VARCHAR" property="labelOptRuleShow"/>
+        <result column="CUSTOM_OPT_RULE_SHOW" jdbcType="VARCHAR" property="customOptRuleShow"/>
+        <result column="KPI_DIFF_RULE" jdbcType="VARCHAR" property="kpiDiffRule"/>
+        <result column="STATUS" jdbcType="INTEGER" property="status"/>
+        <result column="DATA_STATUS" jdbcType="INTEGER" property="dataStatus"/>
+        <result column="START_DATE" jdbcType="TIMESTAMP" property="startDate"/>
+        <result column="END_DATE" jdbcType="TIMESTAMP" property="endDate"/>
+         <result column="CUSTOM_NUM" jdbcType="INTEGER" property="customNum"/>
+        <result column="DATA_TIME" jdbcType="TIMESTAMP" property="dataTime"/>
+         
+        <result column="DATA_DATE" jdbcType="VARCHAR" property="dataDate"/>
+        <result column="TEMPLATE_ID" jdbcType="VARCHAR" property="templateId"/>
+        <result column="PRODUCT_AUTO_MACTH_FLAG" jdbcType="INTEGER" property="productAutoMacthFlag"/>
+        <result column="IS_PRIVATE" jdbcType="INTEGER" property="isPrivate"/>
+        <result column="CREATE_CITY_ID" jdbcType="VARCHAR" property="createCityId"/>
+        
+        <result column="NEW_MODIFY_TIME" jdbcType="TIMESTAMP" property="newModifyTime"/>
+        <result column="IS_LABEL_OFFLINE" jdbcType="INTEGER" property="isLabelOffline"/>
+        <result column="THUMBNAIL_DATA" jdbcType="VARCHAR" property="thumbnailData"/>
+        
+        <result column="IS_SYS_RECOM" jdbcType="INTEGER" property="isSysRecom"/>
+        <result column="IS_CONTAIN_LOCAL_LIST" jdbcType="INTEGER" property="isContainLocalList"/>
+        <result column="MONTH_LABEL_DATE" jdbcType="VARCHAR" property="monthLabelDate"/>
+        <result column="DAY_LABEL_DATE" jdbcType="VARCHAR" property="dayLabelDate"/>
+        <result column="TACTICS_ID" jdbcType="VARCHAR" property="tacticsId"/>
+        <result column="IS_FIRST_FAILED" jdbcType="INTEGER" property="isFirstFailed"/>
+        <result column="DUPLICATE_NUM" jdbcType="INTEGER" property="duplicateNum"/>
+        
+        <result column="IS_HAS_LIST" jdbcType="INTEGER" property="isHasList"/>
+        <result column="LIST_CREATE_TIME" jdbcType="VARCHAR" property="listCreateTime"/>
+        <result column="CUSTOM_LIST_CREATE_FAILED" jdbcType="INTEGER" property="customListCreateFailed"/>
+        <result column="SERVER_ID" jdbcType="VARCHAR" property="serverId"/>
+        <result column="OFFSET_DATE" jdbcType="VARCHAR" property="offsetDate"/>
+        <result column="LIST_MAX_NUM" jdbcType="INTEGER" property="listMaxNum"/>
+        <result column="AVG_SCORE" jdbcType="DOUBLE" property="avgScore"/>
+        <result column="SYS_ID" jdbcType="VARCHAR" property="sysId"/>
+        <result column="RULE_EXPRESS" jdbcType="VARCHAR" property="ruleExpress"/>
+        <result column="CUSTOM_GROUP_BELONG" jdbcType="INTEGER" property="customGroupBelong"/>
+        <result column="CUSTOM_GROUP_DATA_TYPE" jdbcType="INTEGER" property="customGroupDataType"/>
+        <result column="DATA_SOURCE" jdbcType="VARCHAR" property="dataSource"/>
+        <result column="CUSTOM_GROUP_NET_TYPE" jdbcType="INTEGER" property="customGroupNetType"/>
+       <!-- <result column="SEPARATOR_ID" jdbcType="INTEGER" property="separatorId"/> -->
+        <collection column="CUSTOM_GROUP_ID" property="sceneList" ofType="com.ai.rti.ic.grp.ci.entity.CiCustomSceneRel" select="getCiCustomSceneRel" > 
+    	</collection>
+    </resultMap>
+
+    <select id="getCiCustomSceneRel" parameterType="java.lang.Object" resultType="com.ai.rti.ic.grp.ci.entity.CiCustomSceneRel">
+    	select 
+    	USER_ID userId,
+    	CUSTOM_GROUP_ID customGroupId,
+    	SCENE_ID sceneId,
+    	STATUS status
+    	from CI_CUSTOM_SCENE_REL
+    	where 
+    		CUSTOM_GROUP_ID=#{customGroupId}
+    </select>
+    <sql id="Base_Column_List">
+    CUSTOM_GROUP_ID, CUSTOM_GROUP_NAME, CUSTOM_GROUP_DESC, PARENT_CUSTOM_ID, UPDATE_CYCLE,
+    CREATE_TYPE_ID, CREATE_USER_ID, CREATE_TIME, PROD_OPT_RULE_SHOW, LABEL_OPT_RULE_SHOW,
+    CUSTOM_OPT_RULE_SHOW, KPI_DIFF_RULE, STATUS, DATA_STATUS, START_DATE, END_DATE, DATA_TIME,
+    DATA_DATE, TEMPLATE_ID, PRODUCT_AUTO_MACTH_FLAG, IS_PRIVATE, CREATE_CITY_ID, NEW_MODIFY_TIME,
+    IS_LABEL_OFFLINE, THUMBNAIL_DATA, IS_SYS_RECOM, IS_CONTAIN_LOCAL_LIST, MONTH_LABEL_DATE,
+    DAY_LABEL_DATE, TACTICS_ID, IS_FIRST_FAILED, IS_HAS_LIST, LIST_CREATE_TIME, CUSTOM_LIST_CREATE_FAILED,
+    SERVER_ID, OFFSET_DATE, LIST_MAX_NUM, AVG_SCORE, SYS_ID, RULE_EXPRESS, CUSTOM_GROUP_BELONG,
+    CUSTOM_GROUP_DATA_TYPE, DATA_SOURCE, CUSTOM_GROUP_NET_TYPE, SEPARATOR_ID
+  </sql>
+    <sql id="All_Where">
+        <if test="customGroupId != null and customGroupId != ''">
+            and CUSTOM_GROUP_ID= #{customGroupId}
+        </if>
+        <if test="customGroupName != null and customGroupName != ''">
+            and CUSTOM_GROUP_NAME= #{customGroupName}
+        </if>
+        <if test="customGroupDesc != null and customGroupDesc != ''">
+            and CUSTOM_GROUP_DESC= #{customGroupDesc}
+        </if>
+        <if test="parentCustomId != null and parentCustomId != ''">
+            and PARENT_CUSTOM_ID= #{parentCustomId}
+        </if>
+        <if test="updateCycle != null and updateCycle != ''">
+            and UPDATE_CYCLE= #{updateCycle}
+        </if>
+        <if test="createTypeId != null and createTypeId != ''">
+            and CREATE_TYPE_ID= #{createTypeId}
+        </if>
+        <if test="createUserId != null and createUserId != ''">
+            and CREATE_USER_ID= #{createUserId}
+        </if>
+        <if test="createTime != null and createTime != ''">
+            and CREATE_TIME= #{createTime}
+        </if>
+        <if test="prodOptRuleShow != null and prodOptRuleShow != ''">
+            and PROD_OPT_RULE_SHOW= #{prodOptRuleShow}
+        </if>
+        <if test="labelOptRuleShow != null and labelOptRuleShow != ''">
+            and LABEL_OPT_RULE_SHOW= #{labelOptRuleShow}
+        </if>
+        <if test="customOptRuleShow != null and customOptRuleShow != ''">
+            and CUSTOM_OPT_RULE_SHOW= #{customOptRuleShow}
+        </if>
+        <if test="kpiDiffRule != null and kpiDiffRule != ''">
+            and KPI_DIFF_RULE= #{kpiDiffRule}
+        </if>
+        <if test="status != null and status != ''">
+            and STATUS= #{status}
+        </if>
+        <if test="dataStatus != null and dataStatus != ''">
+            and DATA_STATUS= #{dataStatus}
+        </if>
+        <if test="startDate != null and startDate != ''">
+            and START_DATE= #{startDate}
+        </if>
+        <if test="endDate != null and endDate != ''">
+            and END_DATE= #{endDate}
+        </if>
+        <if test="dataTime != null and dataTime != ''">
+            and DATA_TIME= #{dataTime}
+        </if>
+        <if test="dataDate != null and dataDate != ''">
+            and DATA_DATE= #{dataDate}
+        </if>
+        <if test="templateId != null and templateId != ''">
+            and TEMPLATE_ID= #{templateId}
+        </if>
+        <if test="productAutoMacthFlag != null and productAutoMacthFlag != ''">
+            and PRODUCT_AUTO_MACTH_FLAG= #{productAutoMacthFlag}
+        </if>
+        <if test="isPrivate != null and isPrivate != ''">
+            and IS_PRIVATE= #{isPrivate}
+        </if>
+        <if test="createCityId != null and createCityId != ''">
+            and CREATE_CITY_ID= #{createCityId}
+        </if>
+        <if test="newModifyTime != null and newModifyTime != ''">
+            and NEW_MODIFY_TIME= #{newModifyTime}
+        </if>
+        <if test="isLabelOffline != null and isLabelOffline != ''">
+            and IS_LABEL_OFFLINE= #{isLabelOffline}
+        </if>
+        <if test="thumbnailData != null and thumbnailData != ''">
+            and THUMBNAIL_DATA= #{thumbnailData}
+        </if>
+        <if test="isSysRecom != null and isSysRecom != ''">
+            and IS_SYS_RECOM= #{isSysRecom}
+        </if>
+        <if test="isContainLocalList != null and isContainLocalList != ''">
+            and IS_CONTAIN_LOCAL_LIST= #{isContainLocalList}
+        </if>
+        <if test="monthLabelDate != null and monthLabelDate != ''">
+            and MONTH_LABEL_DATE= #{monthLabelDate}
+        </if>
+        <if test="dayLabelDate != null and dayLabelDate != ''">
+            and DAY_LABEL_DATE= #{dayLabelDate}
+        </if>
+        <if test="tacticsId != null and tacticsId != ''">
+            and TACTICS_ID= #{tacticsId}
+        </if>
+        <if test="isFirstFailed != null and isFirstFailed != ''">
+            and IS_FIRST_FAILED= #{isFirstFailed}
+        </if>
+        <if test="isHasList != null and isHasList != ''">
+            and IS_HAS_LIST= #{isHasList}
+        </if>
+        <if test="listCreateTime != null and listCreateTime != ''">
+            and LIST_CREATE_TIME= #{listCreateTime}
+        </if>
+        <if test="customListCreateFailed != null and customListCreateFailed != ''">
+            and CUSTOM_LIST_CREATE_FAILED= #{customListCreateFailed}
+        </if>
+        <if test="serverId != null and serverId != ''">
+            and SERVER_ID= #{serverId}
+        </if>
+        <if test="offsetDate != null and offsetDate != ''">
+            and OFFSET_DATE= #{offsetDate}
+        </if>
+        <if test="listMaxNum != null and listMaxNum != ''">
+            and LIST_MAX_NUM= #{listMaxNum}
+        </if>
+        <if test="avgScore != null and avgScore != ''">
+            and AVG_SCORE= #{avgScore}
+        </if>
+        <if test="sysId != null and sysId != ''">
+            and SYS_ID= #{sysId}
+        </if>
+        <if test="ruleExpress != null and ruleExpress != ''">
+            and RULE_EXPRESS= #{ruleExpress}
+        </if>
+        <if test="customGroupBelong != null and customGroupBelong != ''">
+            and CUSTOM_GROUP_BELONG= #{customGroupBelong}
+        </if>
+        <if test="customGroupDataType != null and customGroupDataType != ''">
+            and CUSTOM_GROUP_DATA_TYPE= #{customGroupDataType}
+        </if>
+        <if test="dataSource != null and dataSource != ''">
+            and DATA_SOURCE= #{dataSource}
+        </if>
+        <if test="customGroupNetType != null and customGroupNetType != ''">
+            and CUSTOM_GROUP_NET_TYPE= #{customGroupNetType}
+        </if>
+        <if test="separatorId != null and separatorId != ''">
+            and SEPARATOR_ID= #{separatorId}
+        </if>
+    </sql>
+
+    <select id="selectOtherSysCustomGroupId" parameterType="java.lang.Object" resultType="java.lang.Object">
+        select out_group_id from ZJCOC_CUST_PUSH_RELA where custom_group_id=#{customGroupId} and sys_id=#{sysId}
+    </select>
+    
+    <select id="queryCustomer" parameterType="java.lang.Object" resultMap="BaseResultMap">
+    	select 
+			 <include refid="Base_Column_List"/>
+		 from CI_CUSTOM_GROUP_INFO g 
+    	 where 1=1
+   		 <if test="groupId != null and groupId != ''">
+    	 	and g.group_id = #{groupId}
+    	 </if>
+    	 <if test="customGroupId != null and customGroupId != ''">
+    	 	and  g.CUSTOM_GROUP_ID = #{customGroupId}
+    	 </if>
+    </select>
+    
+
+    <select id="selectCiCustomGroupListInfo" parameterType="com.ai.rti.ic.grp.entity.CiCustomGroupInfo"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ci_custom_group_info
+        where 1=1
+        <include refid="All_Where"/>
+    </select>
+
+
+    <insert id="insertCustomGroupPushCycle" parameterType="com.ai.rti.ic.grp.ci.entity.CiCustomGroupPushCycle">
+        insert into CI_CUSTOM_GROUP_PUSH_CYCLE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customGroupId != null">
+                CUSTOM_GROUP_ID,
+            </if>
+            <if test="customGroupName != null">
+                SYS_ID,
+            </if>
+            <if test="customGroupDesc != null">
+                STATUS,
+            </if>
+            <if test="parentCustomId != null">
+                PUSH_CYCLE,
+            </if>
+            <if test="updateCycle != null">
+                IS_PUSHED,
+            </if>
+            <if test="createTypeId != null">
+                MODIFY_TIME
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customGroupId != null">
+                #{customGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="sysId != null">
+                #{sysId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="pushCycle != null">
+                #{pushCycle,jdbcType=INTEGER},
+            </if>
+            <if test="isPushed != null">
+                #{isPushed,jdbcType=INTEGER},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+
+    <select id="selectPushCycleByGroupId" parameterType="java.lang.String"
+           resultType="com.ai.rti.ic.grp.ci.entity.CiCustomGroupPushCycle">
+        select
+        	CUSTOM_GROUP_ID,
+        	SYS_ID,
+        	STATUS,
+        	PUSH_CYCLE,
+        	IS_PUSHED
+        	
+        from CI_CUSTOM_GROUP_PUSH_CYCLE
+        where CUSTOM_GROUP_ID=#{customGroupId}
+    </select>
+
+</mapper>

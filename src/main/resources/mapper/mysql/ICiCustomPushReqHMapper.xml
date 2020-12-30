@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.ci.dao.ICiCustomPushReqHDao">
+    <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.ci.entity.CiCustomPushReq">
+	    <result column="req_id" jdbcType="VARCHAR" property="reqId"/>
+	    <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+	    <result column="LIST_TABLE_NAME" jdbcType="VARCHAR" property="listTableName"/>
+        <result column="sys_id" jdbcType="VARCHAR" property="sysId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="REQ_TIME" jdbcType="TIMESTAMP" property="reqTime"/>
+        <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="exe_info" jdbcType="VARCHAR" property="exeInfo"/>
+    </resultMap>
+
+    <sql id="All_Column">
+        req_id, user_id, LIST_TABLE_NAME,
+        sys_id, status, REQ_TIME,
+        START_TIME, END_TIME, exe_info
+    </sql>
+
+
+
+    <insert id="insertCiCustomPushReq" parameterType="com.ai.rti.ic.grp.ci.entity.CiCustomPushReq">
+    <!--<generator class="assigned" />-->
+        insert into CI_CUSTOM_PUSH_REQ
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reqId != null">
+                req_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="listTableName != null">
+                LIST_TABLE_NAME,
+            </if>
+            <if test="sysId != null">
+                sys_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="reqTime != null">
+                REQ_TIME,
+            </if>
+            <if test="startTime != null">
+                START_TIME,
+            </if>
+            <if test="endTime != null">
+                END_TIME,
+            </if>
+            <if test="exeInfo != null">
+                exe_info
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="reqId != null">
+                #{reqId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="listTableName != null">
+                #{listTableName,jdbcType=VARCHAR},
+            </if>
+            <if test="sysId != null">
+                #{sysId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="reqTime != null">
+                #{reqTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="exeInfo != null">
+                #{exeInfo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <select id="select" parameterType="com.ai.rti.ic.grp.ci.entity.CiCustomPushReq" resultMap="BaseResultMap">
+    	select 
+			 <include refid="All_Column"/>
+		 from CI_CUSTOM_PUSH_REQ g 
+    	 where 1=1
+   		  <if test="reqId != null">
+               and req_id=#{reqId} 
+            </if>
+            <if test="userId != null">
+               and user_id=#{userId}
+            </if>
+            <if test="listTableName != null">
+               and LIST_TABLE_NAME=#{listTableName}
+            </if>
+            <if test="sysId != null">
+               and sys_id=#{sysId}
+            </if>
+            <if test="status != null">
+               and status=#{status}
+            </if>
+            <if test="reqTime != null">
+               and REQ_TIME=#{reqTime}
+            </if>
+            <if test="startTime != null">
+               and START_TIME=#{startTime}
+            </if>
+            <if test="endTime != null">
+               and END_TIME=#{endTime}
+            </if>
+            <if test="exeInfo != null">
+               and exe_info=#{exeInfo}
+            </if>
+    </select>
+
+
+    <update id="updateCiCustomPushReqById" parameterType="com.ai.rti.ic.grp.ci.entity.CiCustomPushReq">
+        update CI_CUSTOM_PUSH_REQ
+        set 
+        <trim suffixOverrides=",">
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="listTableName != null">
+                LIST_TABLE_NAME = #{listTableName},
+            </if>
+            <if test="sysId != null">
+                sys_id=#{sysId},
+            </if>
+            <if test="status != null">
+                status=#{status},
+            </if>
+            <if test="reqTime != null">
+                REQ_TIME=#{reqTime},
+            </if>
+            <if test="startTime != null">
+                START_TIME=#{startTime},
+            </if>
+            <if test="endTime != null">
+                END_TIME=#{endTime},
+            </if>
+            <if test="exeInfo != null">
+                exe_info=#{exeInfo}
+            </if>
+        </trim>
+        where req_id = #{reqId}
+    </update>
+</mapper>

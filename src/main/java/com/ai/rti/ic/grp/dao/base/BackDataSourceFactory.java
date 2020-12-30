@@ -8,6 +8,7 @@
  import java.sql.SQLException;
  import org.slf4j.Logger;
  import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
  
  
  
@@ -17,6 +18,8 @@
    private static final transient Logger logger = LoggerFactory.getLogger(com.ai.rti.ic.grp.dao.base.BackDataSourceFactory.class);
    
    private static ComboPooledDataSource dataSource;
+   
+   private static JdbcTemplate backSimpleJdbcTemplate;
    
    static {
      try {
@@ -39,6 +42,8 @@
        dataSource.setMaxAdministrativeTaskTime(60);
        
        dataSource.setIdleConnectionTestPeriod(180);
+       
+       backSimpleJdbcTemplate = new JdbcTemplate(dataSource);
      } catch (PropertyVetoException e) {
        logger.error("初始化连接池失败!", e);
      } 
@@ -53,5 +58,9 @@
      } 
      return conn;
    }
+   
+	public static JdbcTemplate getBackSimpleJdbcTemplate() {
+		return backSimpleJdbcTemplate;
+	}
  }
 

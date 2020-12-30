@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.ci.dao.ICiSysInfoHDao">
+    <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.ci.entity.CiSysInfo">
+        <result column="sys_id" jdbcType="VARCHAR" property="sysId"/>
+        <result column="sys_name" jdbcType="VARCHAR" property="sysName"/>
+        <result column="ftp_server_ip" jdbcType="VARCHAR" property="ftpServerIp"/>
+        <result column="ftp_port" jdbcType="VARCHAR" property="ftpPort"/>
+        <result column="ftp_user" jdbcType="VARCHAR" property="ftpUser"/>
+        <result column="ftp_pwd" jdbcType="VARCHAR" property="ftpPwd"/>
+        <result column="ftp_path" jdbcType="VARCHAR" property="ftpPath"/>
+        <result column="local_path" jdbcType="VARCHAR" property="localPath"/>
+        <result column="WEBSERVICE_WSDL" jdbcType="VARCHAR" property="webserviceWSDL"/>
+        <result column="WEBSERVICE_TARGETNAMESPACE" jdbcType="VARCHAR" property="webserviceTargetNamespace"/>
+        <result column="WEBSERVICE_METHOD" jdbcType="VARCHAR" property="webserviceMethod"/>
+        <result column="WEBSERVICE_ARGS" jdbcType="VARCHAR" property="webserviceArgs"/>
+        <result column="SHOW_IN_PAGE" jdbcType="INTEGER" property="showInPage"/>
+        <result column="DESC_TXT" jdbcType="VARCHAR" property="descTxt"/>
+        <result column="IS_NEED_XML" jdbcType="INTEGER" property="isNeedXml"/>
+        <result column="IS_NEED_DES" jdbcType="INTEGER" property="isNeedDes"/>
+        <result column="DES_KEY" jdbcType="VARCHAR" property="desKey"/>
+        <result column="IS_NEED_CYCLE" jdbcType="INTEGER" property="isNeedCycle"/>
+        <result column="ACTION_ID" jdbcType="VARCHAR" property="actionId"/>
+        <result column="FUNCTION_ID" jdbcType="VARCHAR" property="functionId"/>
+        <result column="PUSH_CLASS_NAME" jdbcType="VARCHAR" property="pushClassName"/>
+    </resultMap>
+
+    <sql id="All_Column">
+
+      sys_id, sys_name, ftp_server_ip,
+      ftp_port, ftp_user, ftp_pwd,
+      ftp_path, local_path, WEBSERVICE_WSDL,
+      WEBSERVICE_TARGETNAMESPACE, WEBSERVICE_METHOD, WEBSERVICE_ARGS,
+      SHOW_IN_PAGE, DESC_TXT,IS_NEED_XML,IS_NEED_DES,
+      DES_KEY,IS_NEED_CYCLE,ACTION_ID,FUNCTION_ID,PUSH_CLASS_NAME
+
+  </sql>
+  
+   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="All_Column"/>
+        from CI_SYS_INFO
+        where 
+		 	sys_id= #{sysId} 
+    </select>
+    
+</mapper>

@@ -33,4 +33,9 @@
    public void updateSelective(CiCustomListInfo ciCustomListInfo) {
      this.ciCustomListInfoDao.updateSelective(ciCustomListInfo);
    }
+
+	@Override
+	public void deleteCustomListInfo(String customGroupId, String dataDate) {
+		this.ciCustomListInfoDao.deleteCustomListInfo(customGroupId, dataDate);
+	}
  }

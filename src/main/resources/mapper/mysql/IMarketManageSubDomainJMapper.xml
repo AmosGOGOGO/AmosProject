@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ai.rti.ic.grp.ci.dao.IMarketManageSubDomainJDao">
+     <!-- 查询market_manage_sub_domain表数据 -->
+    <select id="queryDimList" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT 
+			MASTER_DATA_CODE,
+			MASTER_DATA_NAME,
+			CODE_VALUE,
+			VALUE,
+			ILLUSTRATE,
+			REMAIN
+		FROM market_manage_sub_domain WHERE master_data_code = #{masterDataCode}
+    </select>
+    
+    <select id="queryObjList"  parameterType="com.ai.rti.ic.grp.ci.entity.MarketManageSubDomain" resultType="com.ai.rti.ic.grp.ci.entity.MarketManageSubDomain">
+		SELECT * FROM market_manage_sub_domain where 1=1 
+		 <if test="masterDataCode != null and masterDataCode != ''">
+            and master_data_code= #{masterDataCode}
+        </if>
+		 <if test="masterDataName != null and masterDataName != ''">
+            and master_data_code like #{masterDataName}
+        </if>
+         <if test="codeValue != null and codeValue != ''">
+            and code_value= #{codeValue}
+        </if>
+         <if test="value != null and value != ''">
+            and VALUE= #{value}
+        </if>
+    </select>
+</mapper>

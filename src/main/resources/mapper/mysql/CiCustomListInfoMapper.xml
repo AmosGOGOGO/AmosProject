@@ -238,5 +238,7 @@
 
     </update>
 
-
+     <update id="deleteCustomListInfo" parameterType="java.lang.String">
+     	delete from ci_custom_list_info where CUSTOM_GROUP_ID=#{customGroupId} and DATA_DATE=#{dataDate}
+     </update>
 </mapper>

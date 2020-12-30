@@ -18,7 +18,7 @@ import com.ai.rti.ic.grp.entity.CiLabelRule;
 import com.ai.rti.ic.grp.entity.DataSource;
 import com.ai.rti.ic.grp.entity.MarketManageSubDomain;
 import com.ai.rti.ic.grp.entity.TarGrpImportTask;
-import com.ai.rti.ic.grp.service.ICiCustomFileRelService;
+//import com.ai.rti.ic.grp.service.ICiCustomFileRelService;
 import com.ai.rti.ic.grp.service.ICiCustomIncreMaintainService;
 import com.ai.rti.ic.grp.service.ICiCustomListInfoService;
 import com.ai.rti.ic.grp.service.ILocalDataMarketService;
@@ -78,8 +78,8 @@ import org.springframework.stereotype.Service;
    @Autowired
    private IMarketManageSubDomainDao marketManageSubDomainDao;
    
-   public TarGrpImportTask getTarGrpTask() {
-     return this.tarGrpImportTaskDao.getTarGrpTask();
+   public TarGrpImportTask getTarGrpTask(List<String> cityIdList) {
+     return this.tarGrpImportTaskDao.getTarGrpTask(cityIdList);
    }
  
  
@@ -182,7 +182,9 @@ import org.springframework.stereotype.Service;
  
        String[] argsNames = Config.getObject("CPT_ATTRS_NAME").split(",");
        if (tarGrpImportTask.getIsTactic().intValue() == 1 && i == tarGrpDataType + 1) {
-         byte b; int j; String[] arrayOfString; for (j = (arrayOfString = argsNames).length, b = 0; b < j; ) { String argsName = arrayOfString[b];
+         byte b; int j; String[] arrayOfString; 
+         for (j = (arrayOfString = argsNames).length, b = 0; b < j; ) {
+        	 String argsName = arrayOfString[b];
            CiGroupAttrRel ciGroupAttrRel1 = new CiGroupAttrRel();
            CiGroupAttrRelId ciGroupAttrRelId1 = new CiGroupAttrRelId();
            ciGroupAttrRelId1.setAttrCol(genCustomAttrColumnName(colIndex));
@@ -196,7 +198,8 @@ import org.springframework.stereotype.Service;
            ciGroupAttrRel1.setIsVerticalAttr(0);
            ciGroupAttrRel1.setStatus(Integer.valueOf(0));
            ciGroupAttrRelList.add(ciGroupAttrRel1);
-           b++; }
+           b++;
+           }
        
        } 
        ciGroupAttrRelId.setAttrCol(genCustomAttrColumnName(colIndex));
@@ -696,7 +699,8 @@ import org.springframework.stereotype.Service;
  
      
      boolean flag = false; byte b; int i; String[] arrayOfString1;
-     for (i = (arrayOfString1 = needcolumn).length, b = 0; b < i; ) { String col = arrayOfString1[b];
+     for (i = (arrayOfString1 = needcolumn).length, b = 0; b < i; ) { 
+    	 String col = arrayOfString1[b];
        
        if (!column.trim().equalsIgnoreCase(col.trim())) {
          if (flag) {

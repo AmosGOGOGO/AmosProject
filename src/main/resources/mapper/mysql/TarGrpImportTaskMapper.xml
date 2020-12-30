@@ -450,6 +450,12 @@
         from tar_grp_import_task task
         WHERE STATUS = 1
         AND status_cd = 1000
+        <if test="cityIdList != null and cityIdList.size()>0">
+            and city_id in
+            <foreach collection="cityIdList" item="item" open="(" separator="," close=")">
+           	 #{item}
+            </foreach>
+        </if>
         AND EXISTS
         (SELECT
         a.status

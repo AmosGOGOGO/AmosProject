@@ -57,14 +57,6 @@ import org.apache.log4j.Logger;
      } 
      return response;
    }
- 
- 
- 
- 
- 
- 
- 
-   
    public static String getMethod(String url) {
      String responseBody = "";
      HttpClient client = new HttpClient();
@@ -137,13 +129,6 @@ import org.apache.log4j.Logger;
      } 
      return responseBody;
    }
- 
- 
- 
- 
- 
- 
-   
    public static String doGet(String requestUrl) {
      String resultStr = "";
      if ("".equals(requestUrl))
@@ -169,5 +154,33 @@ import org.apache.log4j.Logger;
      } 
      return resultStr;
    }
+   
+	public static String doPost(String strUrl, String postString) {
+		String receive = null;
+	
+		PostMethod method = new PostMethod(strUrl);
+	
+		try {
+			HttpClient client = new HttpClient();
+	
+			method.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+			method.setRequestHeader("Accept", "application/json; charset=UTF-8");
+	
+			method.getParams().setParameter("http.method.retry-handler", new DefaultHttpMethodRetryHandler());
+	
+			method.setRequestBody(postString);
+			int rspCode = client.executeMethod((HttpMethod) method);
+	
+			System.out.println("rspCode:" + rspCode);
+			receive = method.getResponseBodyAsString();
+			System.out.println("receive:" + receive);
+			return receive;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			method.releaseConnection();
+		}
+		return receive;
+	}
  }
 

@@ -27,6 +27,25 @@
      synchronized (this) {
        ITarGrpImportTaskDao tarGrpImportTaskDao = (ITarGrpImportTaskDao)SpringContextUtil.getBean(ITarGrpImportTaskDao.class);
        TarGrpImportTask tarGrpImportTask = new TarGrpImportTask();
+       
+       
+       tarGrpImportTask.setUpdateCycle(3);
+       tarGrpImportTask.setStatus(1);
+       final List<TarGrpImportTask> liststatus1 = tarGrpImportTaskDao.selectSelective(tarGrpImportTask);
+       final int cnt_waitcreat = liststatus1.size();
+       tarGrpImportTask.setUpdateCycle(3);
+       tarGrpImportTask.setStatus(2);
+       final List<TarGrpImportTask> liststatus2 = tarGrpImportTaskDao.selectSelective(tarGrpImportTask);
+       final int cnt_creating = liststatus2.size();
+       final int task_cnt = cnt_waitcreat + cnt_creating;
+       if (task_cnt > 10) {
+           return;
+       }
+       tarGrpImportTask = new TarGrpImportTask();
+
+       
+       
+       
        tarGrpImportTask.setUpdateCycle(Integer.valueOf(3));
        List<TarGrpImportTask> list = tarGrpImportTaskDao.selectSelective(tarGrpImportTask);
        for (TarGrpImportTask task : list) {

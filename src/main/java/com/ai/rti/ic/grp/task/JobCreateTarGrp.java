@@ -1,6 +1,7 @@
  package  com.ai.rti.ic.grp.task;
  
- import com.ai.rti.ic.grp.entity.CiCustomGroupInfo;
+ import com.ai.rti.ic.grp.ci.service.ICustomersManagerService;
+import com.ai.rti.ic.grp.entity.CiCustomGroupInfo;
  import com.ai.rti.ic.grp.entity.CiCustomListInfo;
  import com.ai.rti.ic.grp.entity.TarGrpImportTask;
  import com.ai.rti.ic.grp.service.ICiCustomListInfoService;
@@ -9,14 +10,18 @@
  import com.ai.rti.ic.grp.utils.Config;
  import com.ai.rti.ic.grp.utils.HttpClientUtil;
  import com.ai.rti.ic.grp.utils.SpringContextUtil;
- import com.alibaba.fastjson.JSONObject;
+import com.ai.rti.ic.grp.utils.StringUtil;
+import com.alibaba.fastjson.JSONObject;
  import java.text.SimpleDateFormat;
- import java.util.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
  import java.util.HashMap;
  import java.util.List;
  import java.util.Map;
  import org.slf4j.Logger;
  import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
  
  public class JobCreateTarGrp  implements Runnable
  {
@@ -29,8 +34,14 @@
    
    private TarGrpImportTask getTask() {
      synchronized (this) {
+    	 List<String> cityIdList = new ArrayList<>();
+    	 String cityIds = Config.getObject("TASK_CITY_IDS");
+    	 
+    	 if(StringUtil.isNotEmpty(cityIds)) {
+    		cityIdList.addAll(Arrays.asList(cityIds.split(",")));
+    	 }
        ITarGrpImportTaskService tarGrpImportTaskServiceImpl = (ITarGrpImportTaskService)SpringContextUtil.getBean(ITarGrpImportTaskService.class);
-       TarGrpImportTask tarGrpImportTask = tarGrpImportTaskServiceImpl.getTarGrpTask();
+       TarGrpImportTask tarGrpImportTask = tarGrpImportTaskServiceImpl.getTarGrpTask(cityIdList);
        if (tarGrpImportTask != null) {
     	   
     	  //2表示创建中
@@ -84,6 +95,8 @@
          tarGrpImportTask.setDataDate(date);
          ciCustomGroupInfo.setDataDate(date);
        } 
+       ciCustomListInfoService.deleteCustomListInfo(ciCustomGroupInfo.getCustomGroupId(), tarGrpImportTask.getDataDate());
+       
        ciCustomListInfo = tarGrpImportTaskServiceImpl.createCustomList(ciCustomGroupInfo);
        tarGrpImportTaskServiceImpl.updateTarGrpImportTask(tarGrpImportTask);
        logger.info("调度任务tarGrpImportTask:" + tarGrpImportTask);
@@ -123,17 +136,19 @@
        
        logger.info("生成客户群成功");
        
-       Map<String, String> param = new HashMap<>(8);
-       param.put("customGroupId", tarGrpImportTask.getTarGrpId());
-       param.put("userId", tarGrpImportTask.getCreateStaff());
-       String resp = HttpClientUtil.postMethod(Config.getObject("CUSTOM_GROUP_PUST"), param);
-       logger.info("推送客户群返回信息：" + resp);
-       JSONObject object = JSONObject.parseObject(resp);
+       ICustomersManagerService customersService = (ICustomersManagerService)SpringContextUtil.getBean(ICustomersManagerService.class);
+       customersService.pushCustomerGroup(tarGrpImportTask.getTarGrpId(), tarGrpImportTask.getCreateStaff());
        
-       if (object.getInteger("code").intValue() != 1000) {
-         throw new RuntimeException(object.getString("msg"));
-       
-       }
+//       Map<String, String> param = new HashMap<>(8);
+//       param.put("customGroupId", tarGrpImportTask.getTarGrpId());
+//       param.put("userId", tarGrpImportTask.getCreateStaff());
+//       String resp = HttpClientUtil.postMethod(Config.getObject("CUSTOM_GROUP_PUST"), param);
+//       logger.info("推送客户群返回信息：" + resp);
+//       JSONObject object = JSONObject.parseObject(resp);
+//       if (object.getInteger("code").intValue() != 1000) {
+//         throw new RuntimeException(object.getString("msg"));
+//       
+//       }
      }
      catch (Exception e) {
        logger.error("创建客户群出错", e);

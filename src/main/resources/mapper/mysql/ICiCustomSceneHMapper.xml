@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.ci.dao.ICiCustomSceneHDao">
+    <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.ci.entity.CiCustomSceneRel">
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="CUSTOM_GROUP_ID" jdbcType="VARCHAR" property="customGroupId"/>
+        <result column="SCENE_ID" jdbcType="VARCHAR" property="sceneId"/>
+        <result column="STATUS" jdbcType="INTEGER" property="status"/>
+        <result column="MODIFY_TIME" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+
+    <sql id="All_Column">
+
+      USER_ID, CUSTOM_GROUP_ID,
+      SCENE_ID, STATUS, MODIFY_TIME
+
+	</sql>
+
+    <select id="getCustomScenesByCustomId" resultMap="BaseResultMap" parameterType="java.lang.String">
+
+        select
+        	<include refid="All_Column"/>
+        from CI_CUSTOM_SCENE_REL
+        where CUSTOM_GROUP_ID= #{customGroupId} and status = 1
+
+    </select>
+
+
+
+</mapper>

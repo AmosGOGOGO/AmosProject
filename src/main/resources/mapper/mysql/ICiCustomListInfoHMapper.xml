@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.ci.dao.ICiCustomListInfoHDao">
+    <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.ci.entity.CiCustomListInfo">
+        <result column="LIST_TABLE_NAME" jdbcType="VARCHAR" property="listTableName"/>
+        <result column="DATA_DATE" jdbcType="VARCHAR" property="dataDate"/>
+        <result column="CUSTOM_GROUP_ID" jdbcType="VARCHAR" property="customGroupId"/>
+        <result column="CUSTOM_NUM" jdbcType="INTEGER" property="customNum"/>
+        <result column="RING_NUM" jdbcType="INTEGER" property="ringNum"/>
+        <result column="DATA_STATUS" jdbcType="INTEGER" property="dataStatus"/>
+        <result column="DATA_TIME" jdbcType="TIMESTAMP" property="dataTime"/>
+        <result column="END_TIME" jdbcType="TIMESTAMP" property="dataTime"/>
+        <result column="EXCP_INFO" jdbcType="VARCHAR" property="excpInfo"/>
+        <result column="FILE_CREATE_STATUS" jdbcType="INTEGER" property="fileCreateStatus"/>
+        <result column="FILE_APPROVE_STATUS" jdbcType="INTEGER" property="fileApproveStatus"/>
+        <result column="MONTH_LABEL_DATE" jdbcType="VARCHAR" property="monthLabelDate"/>
+        <result column="DAY_LABEL_DATE" jdbcType="VARCHAR" property="dayLabelDate"/>
+        <result column="DUPLICATE_NUM" jdbcType="INTEGER" property="duplicateNum"/>
+        <result column="LIST_MAX_NUM" jdbcType="INTEGER" property="listMaxNum"/>
+        <result column="increment_num" jdbcType="INTEGER" property="incrementNum"/>
+        <result column="decrement_num" jdbcType="INTEGER" property="decrementNum"/>
+        <result column="ABNORMAL_NUM" jdbcType="INTEGER" property="abnormalNum"/>
+        <result column="ELIMINATE_NUM" jdbcType="INTEGER" property="eliminateNum"/>
+    </resultMap>
+
+    <sql id="All_Column">
+      LIST_TABLE_NAME, DATA_DATE, CUSTOM_GROUP_ID,
+      CUSTOM_NUM, RING_NUM, DATA_STATUS, DATA_TIME, END_TIME, EXCP_INFO,FILE_CREATE_STATUS, FILE_APPROVE_STATUS,
+       MONTH_LABEL_DATE, DAY_LABEL_DATE,DUPLICATE_NUM, LIST_MAX_NUM,increment_num, decrement_num,ABNORMAL_NUM,ELIMINATE_NUM
+    </sql>
+  
+   <select id="selectByCustomGroupId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="All_Column"/>
+        from ci_custom_list_info
+        where 
+		 	CUSTOM_GROUP_ID= #{customGroupId} order by DATA_TIME desc
+    </select>
+    
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="All_Column"/>
+        from ci_custom_list_info
+        where 
+		 	LIST_TABLE_NAME= #{listTableName}
+    </select>   
+    
+    <select id="selectPeriodCustomListInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="All_Column"/>
+        from ci_custom_list_info
+        where 
+		 	 CUSTOM_GROUP_ID = #{customGroupId} and data_status = 3 order by DATA_DATE desc limit 2;
+    </select> 
+      
+</mapper>

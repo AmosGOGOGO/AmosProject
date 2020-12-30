@@ -9,5 +9,7 @@ public interface ICiCustomListInfoService {
   void insertSelective(CiCustomListInfo paramCiCustomListInfo);
   
   void updateSelective(CiCustomListInfo paramCiCustomListInfo);
+  
+  void deleteCustomListInfo(String customGroupId, String dataDate);
 }
 

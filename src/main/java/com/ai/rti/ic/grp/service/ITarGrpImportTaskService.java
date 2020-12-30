@@ -6,9 +6,10 @@ import com.ai.rti.ic.grp.entity.TarGrpImportTask;
 import com.ai.rti.ic.grp.exception.ICException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface ITarGrpImportTaskService {
-  TarGrpImportTask getTarGrpTask();
+  TarGrpImportTask getTarGrpTask(List<String> cityIdList);
   
   void updateTarGrpImportTask(TarGrpImportTask paramTarGrpImportTask);
   

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.rti.ic.grp.ci.dao.ICiGroupAttrRelJDao">
+  <resultMap id="BaseResultMap" type="com.ai.rti.ic.grp.ci.entity.CiGroupAttrRel">
+    <id column="CUSTOM_GROUP_ID" jdbcType="VARCHAR" property="customGroupId" />
+    <id column="ATTR_COL" jdbcType="VARCHAR" property="attrCol" />
+    <id column="MODIFY_TIME" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="ATTR_COL_TYPE" jdbcType="VARCHAR" property="attrColType" />
+    <result column="ATTR_COL_NAME" jdbcType="VARCHAR" property="attrColName" />
+    <result column="ATTR_SOURCE" jdbcType="INTEGER" property="attrSource" />
+    <result column="LABEL_OR_CUSTOM_ID" jdbcType="VARCHAR" property="labelOrCustomId" />
+    <result column="LABEL_OR_CUSTOM_COLUMN" jdbcType="VARCHAR" property="labelOrCustomColumn" />
+    <result column="IS_VERTICAL_ATTR" jdbcType="INTEGER" property="isVerticalAttr" />
+    <result column="LIST_TABLE_NAME" jdbcType="VARCHAR" property="listTableName" />
+    <result column="STATUS" jdbcType="SMALLINT" property="status" />
+    <result column="ATTR_VAL" jdbcType="VARCHAR" property="attrVal" />
+    <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+    <result column="SORT_TYPE" jdbcType="VARCHAR" property="sortType" />
+    <result column="SORT_NUM" jdbcType="SMALLINT" property="sortNum" />
+    <result column="col_type_code" jdbcType="VARCHAR" property="colTypeCode" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    CUSTOM_GROUP_ID, ATTR_COL, MODIFY_TIME, ATTR_COL_TYPE, ATTR_COL_NAME, ATTR_SOURCE, 
+    LABEL_OR_CUSTOM_ID, LABEL_OR_CUSTOM_COLUMN, IS_VERTICAL_ATTR, LIST_TABLE_NAME, STATUS, 
+    ATTR_VAL, TABLE_NAME, SORT_TYPE, SORT_NUM, col_type_code
+  </sql>
+  
+   <select id="selectNewestCiGroupAttrRelList" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from CI_GROUP_ATTR_REL where CUSTOM_GROUP_ID = #{customGroupId} 
+        and MODIFY_TIME = (select max(MODIFY_TIME) from CI_GROUP_ATTR_REL where CUSTOM_GROUP_ID = #{customGroupId}) and STATUS = 0
+         order by ATTR_COL
+    </select>
+</mapper>
