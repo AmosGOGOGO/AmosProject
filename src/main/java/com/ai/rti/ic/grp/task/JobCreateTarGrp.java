@@ -136,19 +136,19 @@ import org.springframework.beans.factory.annotation.Autowired;
        
        logger.info("生成客户群成功");
        
-       ICustomersManagerService customersService = (ICustomersManagerService)SpringContextUtil.getBean(ICustomersManagerService.class);
-       customersService.pushCustomerGroup(tarGrpImportTask.getTarGrpId(), tarGrpImportTask.getCreateStaff());
+//       ICustomersManagerService customersService = (ICustomersManagerService)SpringContextUtil.getBean(ICustomersManagerService.class);
+//       customersService.pushCustomerGroup(tarGrpImportTask.getTarGrpId(), tarGrpImportTask.getCreateStaff());
        
-//       Map<String, String> param = new HashMap<>(8);
-//       param.put("customGroupId", tarGrpImportTask.getTarGrpId());
-//       param.put("userId", tarGrpImportTask.getCreateStaff());
-//       String resp = HttpClientUtil.postMethod(Config.getObject("CUSTOM_GROUP_PUST"), param);
-//       logger.info("推送客户群返回信息：" + resp);
-//       JSONObject object = JSONObject.parseObject(resp);
-//       if (object.getInteger("code").intValue() != 1000) {
-//         throw new RuntimeException(object.getString("msg"));
-//       
-//       }
+       Map<String, String> param = new HashMap<>(8);
+       param.put("customGroupId", tarGrpImportTask.getTarGrpId());
+       param.put("userId", tarGrpImportTask.getCreateStaff());
+       String resp = HttpClientUtil.postMethod(Config.getObject("CUSTOM_GROUP_PUST"), param);
+       logger.info("推送客户群返回信息：" + resp);
+       JSONObject object = JSONObject.parseObject(resp);
+       if (object.getInteger("code").intValue() != 1000) {
+         throw new RuntimeException(object.getString("msg"));
+       
+       }
      }
      catch (Exception e) {
        logger.error("创建客户群出错", e);
